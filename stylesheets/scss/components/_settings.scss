@@ -1,0 +1,396 @@
+/**************************************
+********** Table of Contents **********
+***************************************
+- Imports
+- Colors
+- Global
+- Typography
+- Appbar
+- Bottom navigation
+- Bottom sheet
+- Buttons
+- Cards
+- Chips
+- Data tables
+- Dialogs
+- Grid
+- Icons
+- Menu
+- Navigation drawer / sidebar
+- Notifications
+- Pickers
+- Progress
+- Selection controls
+- Sliders
+- Snackbars & Toasts
+- Tabs
+- Text fields
+- Tooltips
+
+/**************************************
+ * Imports
+ **************************************/
+@import 'mixins';
+// Font size
+$font-size: 14 !default; //px Default 14 or 15
+@import 'functions';
+
+/**************************************
+ * Colors
+ **************************************/
+/*
+ * Add / remove colors you would like to use in CSS
+ * NOTE In SCSS all color variables stay accessible
+ *
+ * All colors below
+ * 	$allowed-colors: (
+ 		'red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green', 'lime',
+ 		'yellow', 'amber', 'orange', 'deep-orange', 'brown', 'grey', 'blue-grey', 'shades');
+ */
+
+$allowed-colors: (
+	'red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green',
+	'lime', 'yellow', 'amber', 'orange', 'deep-orange', 'brown', 'grey', 'blue-grey', 'shades');
+
+@import 'colors';
+
+$main-color: $indigo !default;
+$secondary-color: $blue !default;
+
+$link-color: var(--main-color, $main-color);
+$link-hover: var(--secondary-color, $secondary-color);
+
+/**************************************
+ * Global
+ **************************************/
+$theme: light !default; // Default either light or dark
+$typography: english !default; // Default english, dense or tall
+$select-background: $cyan-a200 !default; // Default $cyan-a200
+$basic-transition: cubic-bezier(0.4, 0.0, 0.2, 1) !default; // Default cubic-bezier(0.4, 0.0, 0.2, 1)
+$element-enter-transition: cubic-bezier(0.0, 0.0, 0.2, 1) !default; // Default cubic-bezier(0.0, 0.0, 0.2, 1)
+$element-exit-transition: cubic-bezier(0.4, 0.0, 1, 1) !default; // Default cubic-bezier(0.4, 0.0, 1, 1)
+$returning-transition: cubic-bezier(0.0, 0.0, 0.2, 1) !default; // Default cubic-bezier(0.0, 0.0, 0.2, 1)
+$transition-small-duration: 300ms !default; // Default 300ms
+$transition-medium-duration: 390ms !default; // Default 390ms
+$transition-large-duration: 200ms !default; // Default 200ms
+$background: if( $theme == light, $white, #303030) !default; // Default if( $theme == light, $white, #303030)
+$text-direction: ltr !default; // Default either ltr or rtl
+$border-size: rem-calc(2px) !default; // Default rem-calc(2px)
+
+/**************************************
+ * Typography settings
+ * Default font size under imports
+ **************************************/
+// Font paths
+$roboto-font-path: '/climate-canary/stylesheets/scss/components/fonts/Roboto/' !default;
+$noto-font-path: '/climate-canary/stylesheets/scss/components/fonts/Noto/' !default;
+$montserrat-font-path: '/climate-canary/stylesheets/scss/components/fonts/Montserrat/' !default;
+
+// Colors
+$font-color-display-4: var(--font-color-1, if( $theme == light, rgba($black, .54), rgba($white, .54) ) ) !default; // Default if( $theme == light, rgba($black, .54), rgba($white, .54) )
+$font-color-display-3: $font-color-display-4 !default; // Default $font-color-display-4
+$font-color-display-2: $font-color-display-4 !default; // Default $font-color-display-4
+$font-color-display-1: $font-color-display-4 !default; // Default $font-color-display-4
+$font-color-headline: var(--font-color-2, if( $theme == light, rgba($black, .87), rgba($white, .87) ) ) !default; // Default if( $theme == light, rgba($black, .87), rgba($white, .87) )
+$font-color-title: $font-color-headline !default; // Default $font-color-headline
+$font-color-subhead: $font-color-headline !default; // Default $font-color-headline
+$font-color-body-2: $font-color-headline !default; // Default $font-color-headline
+$font-color-body-1: $font-color-headline !default; // Default $font-color-headline
+$font-color-caption: $font-color-display-4 !default; // Default $font-color-display-4
+$font-color-label: $font-color-display-4 !default; // Default $font-color-display-4
+$font-color-menu: $font-color-headline !default; // Default $font-color-headline
+$font-color-button: $font-color-headline !default; // Default $font-color-headline
+
+/**************************************
+ * AppBar
+ **************************************/
+// Basic (Don't change these, they influence the drawer (sidenav) and tabs as well)
+$appbar-mobile-landscape-height: rem-calc(48px) !default; // Default rem-calc(48px)
+$appbar-mobile-portrait-height: rem-calc(56px) !default; // Default rem-calc(56px)
+$appbar-large-height: rem-calc(64px) !default; // Default rem-calc(64px)
+
+// Colors
+$appbar-background: if( $theme == light, var(--main-color, $main-color), $grey-900 ) !default; // Default if( $theme == light, $main-color, $grey-900 )
+$appbar-text: $white !default; // Default $white
+$appbar-title: $white !default; // Default $white
+
+/**************************************
+ * Badges
+ **************************************/
+$badge-background: $red !default;
+
+/**************************************
+ * Bottom navigation
+ **************************************/
+$bottom-nav-background: var(--main-color, $main-color) !default; // Default $main-color
+$bottom-nav-off-color: rgba($white, .7) !default; // Default rgba($white, .7)
+$bottom-nav-on-color: $white !default; // Default $white
+
+/**************************************
+ * Bottom sheet
+ **************************************/
+$bottom-sheet-background: if( $theme == light, var(--background, $background), $grey-800 ) !default; // Default if( $theme == light, $background, $grey-800 )
+$bottom-sheet-font-color: rgba($black, .87) !default; // Default rgba($black, .87)
+$bottom-sheet-header-font-color: rgba($black, .54) !default; // Default rgba($black, .54)
+$bottom-sheet-icons-color: $bottom-sheet-header-font-color !default; // Default $bottom-sheet-header-font-color
+
+/**************************************
+ * Buttons
+ **************************************/
+$raised-background: var(--main-color, $main-color) !default; // Default $main-color
+$raised-font-color: $white !default; // Default $white
+$raised-icon-color: $raised-font-color !default; // Default $raised-font-color
+$raised-disabled-background: if( $theme == light, rgba($black, .12), rgba($white, .12) ) !default; // Default if( $theme == light, rgba($black, .12), rgba($white, .12) )
+$raised-disabled-font-color: if( $theme == light, rgba($black, .26), rgba($white, .3) ) !default; // Default if( $theme == light, rgba($black, .26), rgba($white, .3) )
+
+$flat-color: var(--main-color, $main-color) !default; // Default $main-color
+$flat-icon-color: $flat-color !default; // Default $flat-color
+$flat-active-background: if( $theme == light, rgba(153, 153, 153, .4), rgba(204, 204, 204, .25) ) !default; // Default if( $theme == light, rgba(153, 153, 153, .4), rgba(204, 204, 204, .25) )
+$flat-disabled-color: if( $theme == light, rgba($black, .26), rgba($white, .3) ) !default; // Default if( $theme == light, rgba($black, .26), rgba($white, .3) )
+
+$floating-background: var(--secondary-color, $secondary-color) !default; // Default $main-color
+$floating-icon-color: $white !default; // Default $white
+
+/**************************************
+ * Cards
+ **************************************/
+$card-background: if( $theme == light, var(--background, $background), $grey-800) !default; // Default if( $theme == light, $background, $grey-800)
+
+/**************************************
+ * Chips
+ **************************************/
+$chips-font-color: $font-color-headline !default; // Default $font-color-headline
+$chips-font-hover-color: $white !default; // Default $white
+$chips-background: $grey-200 !default; // Default $grey-200
+$chips-background-hover: $grey-600 !default; // Default $grey-600
+$chips-delete-cross: $chips-background !default; // Default $chips-background
+$chips-delete-cross-hover: $chips-background-hover !default; // Default $chips-background-hover
+$chips-delete-background: rgba($black, .54) !default; // Default rgba($black, .54)
+$chips-delete-background-hover: $chips-font-hover-color !default; // Default $chips-font-hover-color
+
+/**************************************
+ * Dialogs
+ **************************************/
+$dialog-background: if( $theme == light, var(--background, $background), $grey-800 ) !default; // Default if( $theme == light, $background, $grey-800 )
+
+/**************************************
+ * Grid lists
+ **************************************/
+$grid-background: rgba($black, .3) !default; // Default rgba($black, .3)
+$grid-font-color: $white !default; // Default $white
+
+/**************************************
+ * Pickers
+ **************************************/
+$picker-color: var(--main-color, $main-color) !default;
+
+/**************************************
+ * Progress & activity
+ **************************************/
+$progressbar-background: rgba($main-color, .4) !default; // Default rgba($main-color, .4)
+$progress-background: var(--main-color, $main-color) !default; // Default $main-color
+
+// Circular
+$circular-width: rem-calc(50px) !default; // Default rem-calc(50px)
+$circular-path-width: rem-calc(5px) !default; // Default rem-calc(5px)
+$circular-color1: $red !default;
+$circular-color2: $green !default;
+$circular-color3: $indigo !default;
+$circular-color4: $orange !default;
+
+/**************************************
+ * Selection controls
+ **************************************/
+// Checkbox
+$selection-color: if( $theme == light, rgba($black, .54), rgba($white, .7) ) !default;
+$selection-active-color: rgba( if( color($main-color, 500) != false, color($main-color, 500), $main-color ), 1) !default;
+$selection-disabled-color: if( $theme == light, rgba($black, .26), rgba($white, .3) ) !default;
+
+// Switch
+$switch-track-background: if( $theme == light, rgba($black, .38), rgba($white, .3) ) !default; // Default if( $theme == light, rgba($black, .38), rgba($white, .3) )
+$switch-track-background-active: if( $theme == light, rgba($main-color, .5), rgba(color($main-color, 200), .5) ) !default; // Default if( $theme == light, rgba($main-color, .5), rgba(color($main-color, 200), .5) )
+$switch-thumb-background: if( $theme == light ,rgba($grey-50, 1), rgba($grey-400, 1) ) !default; // Default if( $theme == light ,rgba($grey-50, 1), rgba($grey-400, 1) )
+$switch-thumb-background-active: if( $theme == light, rgba($main-color, 1), rgba(color($main-color, 200), 1) ) !default; // Default if( $theme == light, rgba($main-color, 1), rgba(color($main-color, 200), 1) )
+$switch-thumb-radial-background: if( $theme == light, rgba($grey-400, .2), rgba($grey-400, .2) ) !default; // Default if( $theme == light, rgba($grey-400, .2), rgba($grey-400, .2) )
+$switch-thumb-radial-background-active: if( $theme == light, rgba($main-color, .2), rgba(color($main-color, 200), .2) ) !default; // Default if( $theme == light, rgba($main-color, .2), rgba(color($main-color, 200), .2) )
+$switch-track-disabled-background: if( $theme == light, rgba($black, .12), rgba($white, .1) ) !default; // Default if( $theme == light, rgba($black, .12), rgba($white, .1) )
+$switch-thumb-disabled-background: if( $theme == light, rgba($grey-400, 1), rgba($grey-800, 1) ) !default; // Default if( $theme == light, rgba($grey-400, 1), rgba($grey-800, 1) )
+$switch-thumb-radial-disabled-background: rgba($grey-400, .2) !default; // Default rgba($grey-400, .2)
+
+/**************************************
+* Notifications
+***************************************/
+$notification-background: var(--background, $background) !default; // $background
+
+/**************************************
+ * Navigation drawer
+ **************************************/
+$drawer-background: if( $theme == light, var(--background, $background), $grey-800 ) !default; // Default if( $theme == light, $background, $grey-800 )
+$drawer-hover: $main-color !default; // Default $main-color
+$drawer-small-width: rem-calc(280px) !default;
+$drawer-medium-width: rem-calc(320px) !default;
+
+/**************************************
+ * Shadow & elevation
+ **************************************/
+$elevation-umbra-color: rgba($black, .2) !default;
+$elevation-penumbra-color: rgba($black, .14) !default;
+$elevation-ambient-color: rgba($black, .12) !default;
+
+$elevation-umbra-map: (
+	1: rem-calc(0px) rem-calc(2px) rem-calc(1px) rem-calc(-1px),
+	2: rem-calc(0px) rem-calc(3px) rem-calc(1px) rem-calc(-2px),
+	3: rem-calc(0px) rem-calc(3px) rem-calc(3px) rem-calc(-2px),
+	4: rem-calc(0px) rem-calc(2px) rem-calc(4px) rem-calc(-1px),
+	5: rem-calc(0px) rem-calc(3px) rem-calc(5px) rem-calc(-1px),
+	6: rem-calc(0px) rem-calc(3px) rem-calc(5px) rem-calc(-1px),
+	7: rem-calc(0px) rem-calc(4px) rem-calc(5px) rem-calc(-2px),
+	8: rem-calc(0px) rem-calc(5px) rem-calc(5px) rem-calc(-3px),
+	9: rem-calc(0px) rem-calc(5px) rem-calc(6px) rem-calc(-3px),
+	10: rem-calc(0px) rem-calc(6px) rem-calc(6px) rem-calc(-3px),
+	11: rem-calc(0px) rem-calc(6px) rem-calc(7px) rem-calc(-4px),
+	12: rem-calc(0px) rem-calc(7px) rem-calc(8px) rem-calc(-4px),
+	13: rem-calc(0px) rem-calc(7px) rem-calc(8px) rem-calc(-4px),
+	14: rem-calc(0px) rem-calc(7px) rem-calc(9px) rem-calc(-4px),
+	15: rem-calc(0px) rem-calc(8px) rem-calc(9px) rem-calc(-5px),
+	16: rem-calc(0px) rem-calc(8px) rem-calc(10px) rem-calc(-5px),
+	17: rem-calc(0px) rem-calc(8px) rem-calc(11px) rem-calc(-5px),
+	18: rem-calc(0px) rem-calc(9px) rem-calc(11px) rem-calc(-5px),
+	19: rem-calc(0px) rem-calc(9px) rem-calc(12px) rem-calc(-6px),
+	20: rem-calc(0px) rem-calc(10px) rem-calc(13px) rem-calc(-6px),
+	21: rem-calc(0px) rem-calc(10px) rem-calc(13px) rem-calc(-6px),
+	22: rem-calc(0px) rem-calc(10px) rem-calc(14px) rem-calc(-6px),
+	23: rem-calc(0px) rem-calc(11px) rem-calc(14px) rem-calc(-7px),
+	24: rem-calc(0px) rem-calc(11px) rem-calc(15px) rem-calc(-7px)
+);
+
+$elevation-penumbra-map: (
+	1: rem-calc(0px) rem-calc(1px) rem-calc(1px) rem-calc(0px),
+	2: rem-calc(0px) rem-calc(2px) rem-calc(2px) rem-calc(0px),
+	3: rem-calc(0px) rem-calc(3px) rem-calc(4px) rem-calc(0px),
+	4: rem-calc(0px) rem-calc(4px) rem-calc(5px) rem-calc(0px),
+	5: rem-calc(0px) rem-calc(5px) rem-calc(8px) rem-calc(0px),
+	6: rem-calc(0px) rem-calc(6px) rem-calc(10px) rem-calc(0px),
+	7: rem-calc(0px) rem-calc(7px) rem-calc(10px) rem-calc(1px),
+	8: rem-calc(0px) rem-calc(8px) rem-calc(10px) rem-calc(1px),
+	9: rem-calc(0px) rem-calc(9px) rem-calc(12px) rem-calc(1px),
+	10: rem-calc(0px) rem-calc(10px) rem-calc(14px) rem-calc(1px),
+	11: rem-calc(0px) rem-calc(11px) rem-calc(15px) rem-calc(1px),
+	12: rem-calc(0px) rem-calc(12px) rem-calc(17px) rem-calc(2px),
+	13: rem-calc(0px) rem-calc(13px) rem-calc(19px) rem-calc(2px),
+	14: rem-calc(0px) rem-calc(14px) rem-calc(21px) rem-calc(2px),
+	15: rem-calc(0px) rem-calc(15px) rem-calc(22px) rem-calc(2px),
+	16: rem-calc(0px) rem-calc(16px) rem-calc(24px) rem-calc(2px),
+	17: rem-calc(0px) rem-calc(17px) rem-calc(26px) rem-calc(2px),
+	18: rem-calc(0px) rem-calc(18px) rem-calc(28px) rem-calc(2px),
+	19: rem-calc(0px) rem-calc(19px) rem-calc(29px) rem-calc(2px),
+	20: rem-calc(0px) rem-calc(20px) rem-calc(31px) rem-calc(3px),
+	21: rem-calc(0px) rem-calc(21px) rem-calc(33px) rem-calc(3px),
+	22: rem-calc(0px) rem-calc(22px) rem-calc(35px) rem-calc(3px),
+	23: rem-calc(0px) rem-calc(23px) rem-calc(36px) rem-calc(3px),
+	24: rem-calc(0px) rem-calc(24px) rem-calc(38px) rem-calc(3px)
+);
+
+$elevation-ambient-map: (
+	1: rem-calc(0px) rem-calc(1px) rem-calc(3px) rem-calc(0px),
+	2: rem-calc(0px) rem-calc(1px) rem-calc(5px) rem-calc(0px),
+	3: rem-calc(0px) rem-calc(1px) rem-calc(8px) rem-calc(0px),
+	4: rem-calc(0px) rem-calc(1px) rem-calc(10px) rem-calc(0px),
+	5: rem-calc(0px) rem-calc(1px) rem-calc(14px) rem-calc(0px),
+	6: rem-calc(0px) rem-calc(1px) rem-calc(18px) rem-calc(0px),
+	7: rem-calc(0px) rem-calc(2px) rem-calc(16px) rem-calc(1px),
+	8: rem-calc(0px) rem-calc(3px) rem-calc(14px) rem-calc(2px),
+	9: rem-calc(0px) rem-calc(3px) rem-calc(16px) rem-calc(2px),
+	10: rem-calc(0px) rem-calc(4px) rem-calc(18px) rem-calc(3px),
+	11: rem-calc(0px) rem-calc(4px) rem-calc(20px) rem-calc(3px),
+	12: rem-calc(0px) rem-calc(5px) rem-calc(22px) rem-calc(4px),
+	13: rem-calc(0px) rem-calc(5px) rem-calc(24px) rem-calc(4px),
+	14: rem-calc(0px) rem-calc(5px) rem-calc(26px) rem-calc(4px),
+	15: rem-calc(0px) rem-calc(6px) rem-calc(28px) rem-calc(5px),
+	16: rem-calc(0px) rem-calc(6px) rem-calc(30px) rem-calc(5px),
+	17: rem-calc(0px) rem-calc(6px) rem-calc(32px) rem-calc(5px),
+	18: rem-calc(0px) rem-calc(7px) rem-calc(34px) rem-calc(6px),
+	19: rem-calc(0px) rem-calc(7px) rem-calc(36px) rem-calc(6px),
+	20: rem-calc(0px) rem-calc(8px) rem-calc(38px) rem-calc(7px),
+	21: rem-calc(0px) rem-calc(8px) rem-calc(40px) rem-calc(7px),
+	22: rem-calc(0px) rem-calc(8px) rem-calc(42px) rem-calc(7px),
+	23: rem-calc(0px) rem-calc(9px) rem-calc(44px) rem-calc(8px),
+	24: rem-calc(0px) rem-calc(9px) rem-calc(46px) rem-calc(8px)
+);
+
+/**************************************
+ * Sliders
+ **************************************/
+// Track
+$slider-off-color: lighten($black, (100% - 26%)) !default; // Default lighten($black, (100% - 26%)) !default;
+$slider-thumb-background: $white !default; // Default $white
+$slider-on-color: var(--main-color, $main-color) !default; // Default $main-color
+
+// Bubble
+$slider-bubble-background: $black !default; // Default $black
+$slider-bubble-font-color: $white !default; // Default $white
+
+/**************************************
+ * Snackbars and toasts
+ **************************************/
+$snackbar-color-code: #323232 !default;
+$snackbar-background: rgba($snackbar-color-code, 1) !default; // Default rgba($snackbar-color-code, 1)
+$snackbar-font-color: $white !default; // Default $white
+
+/**************************************
+ * Steppers
+ **************************************/
+$stepper-circle-off-color: rgba($black, .38) !default; // Default rgba($black, .38)
+$stepper-circle-on-color: var(--main-color, $main-color) !default; // Default $main-color
+$stepper-circle-font-color: $white !default; // Default $white
+$stepper-step-off-font-color: rgba($black, .38) !default; // Default rgba($black, .38)
+$stepper-step-on-font-color: rgba($black, .87) !default; // Default rgba($black, .87)
+
+/**************************************
+ * Tabs
+ **************************************/
+$tab-background: var(--mainc-color, $main-color) !default; // Default $main-color
+$tab-font-color: rgba($white, .7) !default; // Default rgba($white, .7)
+$tab-font-on-color: $white !default; // Default $white
+$tab-indicator-on-color: $white !default; // Default $white
+
+/**************************************
+ * Text fields
+ **************************************/
+$textfield-border-size: var(--border-size, $border-size) !default;
+$textfield-off-color: $grey !default; // $grey
+$textfield-on-color: var(--main-color, $main-color) !default; // Default $main-color
+$textfield-disabled-color: $textfield-off-color !default; // Default $textfield-off-color
+$textfield-required-color: $red !default; // Default $red
+$textfield-error-color: $textfield-required-color !default; // Default $textfield-required-color
+
+/**************************************
+ * Tooltips
+ **************************************/
+$tooltip-background: rgba($grey-700, .9) !default; // Default rgba($grey-700, .9)
+$tooltip-font-color: $white !default; // Default $white
+
+/**************************************
+ * Grid settings
+ **************************************/
+// Break points
+$xsmall-screen: 600px !default; // Small mobile
+$small-screen: 960px !default; // Small tablet, medium mobile
+$medium-screen: 1280px !default; // Large tablet
+$large-screen: 1600px !default; // Small desktop
+$xlarge-screen: 1920px !default; // "Normal" desktop
+
+// Columns
+$xsmall-columns: 4 !default; // Default 4
+$small-columns: 8 !default; // Default 8
+$columns: 12 !default; // Default 12
+
+// Gutter
+$gutter: rem-calc(16px) !default; // Default 16px
+$large-gutter: rem-calc(24px) !default; // Default 24px
+
+/**************************************
+ * Icons
+ **************************************/
+$icon-size: rem-calc(24px) !default; // Default rem-calc(24px)
+$icon-align: middle !default; // Default middle

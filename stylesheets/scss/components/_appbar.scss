@@ -1,0 +1,123 @@
+/**************************************
+ * AppBar
+ *
+ * http://www.google.com/design/spec/layout/structure.html#structure-app-bar
+ * http://www.google.com/design/spec/layout/structure.html#structure-toolbars
+ **************************************/
+// More menu
+$appbar-more-margin: rem-calc(4px); // Default rem-calc(4px)
+$appbar-icon-default-size: $appbar-mobile-portrait-height - ($gutter * 2);
+$appbar-icon-landscape-size: $appbar-mobile-landscape-height - ($gutter * 2);
+$appbar-icon-portrait-size: $appbar-icon-default-size;
+$appbar-icon-large-size: $appbar-large-height - (rem-calc(20px) * 2);
+
+.sc-appbar {
+	@include material-shadow(4);
+	background: $appbar-background;
+	color: $appbar-text;
+	line-height: normal;
+	height: $appbar-mobile-portrait-height;
+	position: fixed;
+	width: 100%;
+	z-index: 2;
+	@include flex-container(null, null, flex-start);
+	justify-content: flex-start;
+	@include box-sizing(border-box);
+	padding: 0 $gutter;
+
+	@media only screen and (orientation: landscape) and (max-width: #{$small-screen}) {
+		height: $appbar-mobile-landscape-height;
+	}
+
+	@media only screen and (orientation: portrait) and (max-width: #{$xsmall-screen}) {
+		height: $appbar-mobile-portrait-height;
+	}
+
+	@media #{$small-up} {
+		height: $appbar-large-height;
+		padding: 0 $large-gutter;
+	}
+
+	a, h1, h2, h3, h4, h5, h6 {
+		color: $appbar-text;
+	}
+
+	.material-icons {
+		padding: $gutter 0;
+		color: $appbar-text;
+		font-size: $appbar-icon-default-size;
+		@include square($appbar-icon-default-size);
+
+		@media only screen and (orientation: landscape) and (max-width: #{$small-screen}) {
+			font-size: $appbar-icon-landscape-size;
+			@include square($appbar-icon-landscape-size);
+		}
+
+		@media only screen and (orientation: portrait) and (max-width: #{$xsmall-screen}) {
+			font-size: $appbar-icon-portrait-size;
+			@include square($appbar-icon-portrait-size);
+		}
+
+		@media #{$small-up} {
+			padding: $large-gutter rem-calc(20px);
+			font-size: $appbar-icon-large-size;
+			@include square($appbar-icon-large-size);
+		}
+	}
+
+	&-spacer {
+		@include flex-grow(1);
+	}
+
+	&-title {
+		padding: ($appbar-mobile-portrait-height - (rem-calc($font-size-title+0px) + rem-calc(20px))) 0 rem-calc(20px) 0;
+		margin-left: rem-calc(72px) - (($gutter * 2) + $appbar-icon-default-size);
+
+		@media only screen and (orientation: landscape) and (max-width: #{$small-screen}) {
+			padding: ($appbar-mobile-landscape-height - (rem-calc($font-size-title+0px) + rem-calc(20px))) 0 rem-calc(20px) 0;
+			margin-left: rem-calc(72px) - (($gutter * 2) + $appbar-icon-landscape-size);
+		}
+
+		@media only screen and (orientation: portrait) and (max-width: #{$xsmall-screen}) {
+			padding: ($appbar-mobile-portrait-height - (rem-calc($font-size-title+0px) + rem-calc(20px))) 0 rem-calc(20px) 0;
+			margin-left: rem-calc(72px) - (($gutter * 2) + $appbar-icon-portrait-size);
+		}
+
+		@media #{$small-up} {
+			padding: ($appbar-large-height - (rem-calc($font-size-title+0px) + rem-calc(20px))) 0 rem-calc(20px) 0;
+			margin-left: $drawer-small-width - ($large-gutter + $appbar-icon-large-size);
+		}
+	}
+
+	&-actions {
+		margin-right: auto;
+		text-align: right;
+
+		> a {
+			position: relative;
+		}
+
+		.sc-search-input {
+			display: none;
+		}
+
+		.sc-badge {
+			@include border-radius(50%);
+			background: $badge-background;
+			@include material-shadow(2);
+			font-size: rem-calc(10px);
+			padding: rem-calc(5px);
+			position: absolute;
+			right: rem-calc(-10px);
+			top: 0;
+			text-align: center;
+			@include square( ( rem-calc(5px) * 2 ) + rem-calc(10px) );
+		}
+	}
+
+	&-menu {
+		top: rem-calc(4px);
+		right: rem-calc(4px);
+		left: auto;
+	}
+}

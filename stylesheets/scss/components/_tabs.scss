@@ -1,0 +1,105 @@
+/**************************************
+ * Tabs
+ *
+ * https://material.google.com/components/tabs.html
+ **************************************/
+$tab-indicator-size: var(--border-size, $border-size);
+$tab-height: rem-calc(48px);
+$tab-icon-size: rem-calc(24px);
+$tab-icon-text-height: rem-calc(72px);
+$tab-padding: rem-calc(12px);
+
+.sc-tabs {
+	@include material-shadow(4);
+	background: $tab-background;
+	overflow: auto;
+	overflow-y: hidden;
+	position: fixed;
+	top: $appbar-mobile-portrait-height;
+	width: 100%;
+	z-index: 2;
+	left: 0;
+	right: 0;
+	@include flex-container(null, null, space-between);
+
+	@media only screen and (orientation: landscape) and (max-width: #{$small-screen}) {
+		top: $appbar-mobile-landscape-height;
+	}
+
+	@media only screen and (orientation: portrait) and (max-width: #{$xsmall-screen}) {
+		top: $appbar-mobile-portrait-height;
+	}
+
+	@media #{$small-up} {
+		width: calc(100% - #{$drawer-small-width} + #{rem-calc(1px)});
+		left: $drawer-small-width - rem-calc(1px);
+		top: $appbar-large-height;
+	}
+
+	.sc-tab, .sc-tab-icon, .sc-tab-icon-text {
+		@include flex-item(1, 0);
+		border-bottom: $tab-indicator-size solid $tab-background;
+		color: $tab-font-color;
+		//display: inline-block;
+		font-size: rem-calc(14px);
+		font-weight: 500;
+		max-width: rem-calc(264px);
+		min-width: rem-calc(72px);
+		text-align: center;
+		text-overflow: ellipsis;
+		text-transform: uppercase;
+		white-space: nowrap;
+		@include transition(border $transition-small-duration $basic-transition unquote(',') color $transition-small-duration $basic-transition);
+
+		@media #{$small-up} {
+			min-width: rem-calc(160px);
+		}
+
+		@media #{$medium-only} {
+			@include transition(border $transition-medium-duration $basic-transition unquote(',') color $transition-medium-duration $basic-transition);
+		}
+
+		@media #{$medium-up} {
+			@include transition(border $transition-large-duration $basic-transition unquote(',') color $transition-large-duration $basic-transition);
+		}
+
+		&:hover, &.sc-active {
+			border-bottom: $tab-indicator-size solid $tab-indicator-on-color;
+			color: $tab-font-on-color;
+		}
+
+		.material-icons {
+			@include square($tab-icon-size);
+			font-size: $tab-icon-size;
+		}
+	}
+
+	@if( in-array( 'tab', $tab ) ) {
+		.sc-tab {
+			height: $tab-height;
+			line-height: $tab-height;
+			padding: 0 $tab-padding rem-calc(20px) $tab-padding;
+		}
+	}
+
+	@if( in-array( 'tab-icon', $tab ) ) {
+		.sc-tab-icon {
+			height: $tab-height;
+			line-height: $tab-height;
+			padding: 0 $tab-indicator-size rem-calc(12px) $tab-indicator-size;
+		}
+	}
+
+	@if( in-array( 'tab-icon-text', $tab ) ) {
+		.sc-tab-icon-text {
+			height: rem-calc(72px);
+			padding: rem-calc(10px) $tab-padding rem-calc(16px) $tab-padding;
+
+			span {
+				display: block;
+				margin: rem-calc(10px) 0 0 0;
+				width: 100%;
+			}
+		}
+	}
+}

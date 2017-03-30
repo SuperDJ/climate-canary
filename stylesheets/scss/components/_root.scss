@@ -1,0 +1,16 @@
+/**************************************
+ * Define all CSS variables
+ **************************************/
+:root {
+	--main-color: $main-color;
+	--secondary-color: $secondary-color;
+	--background: $background;
+	--border-size: $border-size;
+	--gutter: $gutter;
+	--font-color-1: $font-color-display-4;
+	--font-color-2: $font-color-headline;
+
+	@media #{$small-up} {
+		--gutter: $large-gutter;
+	}
+}

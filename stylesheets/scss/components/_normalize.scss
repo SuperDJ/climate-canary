@@ -1,0 +1,123 @@
+/**************************************
+ * Remove browser default styles
+ *
+ * https://material.google.com/motion/duration-easing.html
+ **************************************/
+
+html, body {
+	background: var(--background, $background);
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-size: #{$font-size}px;
+	-webkit-print-color-adjust: exact; // Make Chrome print the colors
+}
+
+label {
+	cursor: pointer;
+}
+
+figure {
+	margin: 0;
+
+	img {
+		max-width: 100%;
+	}
+}
+
+img {
+	height: auto;
+	max-width: 100%;
+	display: block;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	word-wrap: break-word;
+}
+
+@include scrollbar();
+
+@include selection() {
+	background: $select-background;
+}
+
+* {
+	@include box-sizing(border-box);
+}
+
+a {
+	color: $link-color;
+	outline: none;
+	text-decoration: none;
+	@include transition(color 300ms cubic-bezier(0.4, 0.0, 0.2, 1));
+
+	@media #{$medium-up} {
+		@include transition(color 390ms cubic-bezier(0.4, 0.0, 0.2, 1));
+	}
+
+	@media #{$large-up} {
+		@include transition(color 200ms cubic-bezier(0.4, 0.0, 0.2, 1));
+	}
+
+	&:hover {
+		color: $link-hover;
+	}
+
+	img {
+		outline: none;
+	}
+}
+
+main {
+	bottom: 0;
+	left: 0;
+	overflow: auto;
+	padding: $gutter ($gutter / 2);
+	position: fixed;
+	right: 0;
+	top: rem-calc(48px);
+
+	@media only screen and (orientation: landscape) and (max-width: #{$small-screen}) {
+		top: rem-calc(48px);
+		padding: $gutter ($gutter / 2);
+	}
+
+	@media only screen and (orientation: portrait) and (max-width: #{$xsmall-screen}) {
+		top: rem-calc(56px);
+		padding: $gutter ($gutter / 2);
+	}
+
+	@media #{$small-up} {
+		top: rem-calc(64px);
+		left: $drawer-small-width;
+		padding: $large-gutter ($large-gutter / 2);
+	}
+}
+
+.sc-circle {
+	@include border-radius(50%);
+}
+
+.sc-left {
+	float: left;
+}
+
+.sc-right {
+	float: right;
+}
+
+.sc-center {
+	text-align: center;
+	vertical-align: middle;
+}
+
+.sc-divider {
+	background: if( $theme == light, rgba($black, .12), rgba($white, .12) );
+	height: var(--border-size, $border-size) / 2;
+}
+
+.sc-trigger {
+	cursor: pointer;
+}

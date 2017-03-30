@@ -1,0 +1,83 @@
+/**************************************
+ * Dialogs
+ *
+ * http://www.google.com/design/spec/components/dialogs.html
+ **************************************/
+
+.sc-dialog {
+	@include material-shadow(24);
+	background: $dialog-background;
+	visibility: hidden;
+	@include opacity(0);
+	position: fixed;
+	width: 100%;
+	@include border-radius(var(--border-size, $border-size));
+	z-index: 5;
+	top: 50%;
+	left: 50%;
+	max-width: calc(100% - ( 2 * #{$gutter}));
+	@include transform(translateX(-50%) translateY(-50%));
+	@include transition(all $transition-small-duration $basic-transition);
+
+	@media #{$medium-only} {
+		@include transition(all $transition-medium-duration $basic-transition);
+	}
+
+	@media #{$medium-up} {
+		width: auto;
+		@include transition(all $transition-large-duration $basic-transition);
+		max-width: calc(100% - ( 2 * #{$large-gutter}));
+	}
+
+	&-background {
+		@include square(100%);
+		background: rgba($black, .87);
+		top: 0;
+		left: 0;
+		position: fixed;
+		z-index: 4;
+		visibility: hidden;
+		@include transition(all $transition-small-duration $basic-transition);
+
+		@media #{$medium-only} {
+			@include transition(all $transition-medium-duration $basic-transition);
+		}
+
+		@media #{$medium-up} {
+			@include transition(all $transition-large-duration $basic-transition);
+		}
+	}
+
+	&.sc-expanded {
+		visibility: visible;
+		@include opacity(1);
+
+		~ .sc-dialog-background {
+			visibility: visible;
+			@include opacity(.3);
+		}
+	}
+
+	.sc-dialog-container {
+		padding: rem-calc(24px);
+	}
+
+	.sc-dialog-title {
+		@extend .sc-title;
+		margin-bottom: rem-calc(20px);
+	}
+
+	.sc-dialog-actions {
+		float: right;
+		height: rem-calc(52px);
+		padding: rem-calc(8px);
+
+		.sc-flat-button, .sc-raised-button {
+			height: rem-calc(36px);
+			line-height: rem-calc(36px);
+			margin: 0 0 0 rem-calc(8px);
+			padding: 0 rem-calc(8px);
+			min-width: rem-calc(64px);
+		}
+	}
+}

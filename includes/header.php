@@ -8,6 +8,7 @@ $file = str_replace( '.php', '', $_SERVER['PHP_SELF'] );
 
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="/climate-canary/stylesheets/stylesheet.css">
+	<link rel="stylesheet" href="/climate-canary/stylesheets/bootstrap.min.css">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

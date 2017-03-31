@@ -5,7 +5,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
 
 <section class="row">
     <div class="col col-xs-4 col-sm-6">
-        <a href="#" class="sc-card center home">
+        <a href="#" class="sc-card sc-center home">
             <div class="sc-card-supporting">
                 <i class="material-icons">home</i>
                 <span>Naar huis</span>
@@ -15,7 +15,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
 
 
     <div class="col col-xs-4 col-sm-6">
-        <a href="#" class="sc-card center home">
+        <a href="#" class="sc-card sc-center home">
             <div class="sc-card-supporting">
                 <i class="material-icons">navigation</i>
                 <span>Navigeer naar</span>
@@ -24,7 +24,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
     </div>
 
     <div class="col col-xs-4 col-sm-6">
-        <a href="#" class="sc-card center home">
+        <a href="#" class="sc-card sc-center home">
             <div class="sc-card-supporting">
                 <i class="material-icons">wb_sunny</i>
                 <span>Temperatuur</span>
@@ -33,7 +33,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
     </div>
 
     <div class="col col-xs-4 col-sm-6">
-        <a href="#" class="sc-card center home">
+        <a href="#" class="sc-card sc-center home">
             <div class="sc-card-supporting">
                 <i class="material-icons">grain</i>
                 <span>CO<sub>2</sub> gehalte</span>
@@ -42,7 +42,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
     </div>
 
     <div class="col col-xs-4 col-sm-6">
-        <a href="#" class="sc-card center home">
+        <a href="#" class="sc-card sc-center home">
             <div class="sc-card-supporting">
                 <i class="material-icons">cloud</i>
                 <span>Luchtvochigheid</span>

@@ -22,7 +22,9 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
             </div>
         </a>
     </div>
+</section>
 
+<section class="row">
     <div class="col col-xs-4 col-sm-6">
         <a href="#" class="sc-card sc-center home">
             <div class="sc-card-supporting">
@@ -40,7 +42,9 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
             </div>
         </a>
     </div>
+</section>
 
+<section class="row">
     <div class="col col-xs-4 col-sm-6">
         <a href="#" class="sc-card sc-center home">
             <div class="sc-card-supporting">

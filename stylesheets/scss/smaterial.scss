@@ -13,7 +13,7 @@
 @import 'components/flex-grid'; // Grid functionality
 @import 'components/normalize'; // Remove browser default styles add Material default styles
 
-$shadow-depths: ('0', '1', '2', '3', '4', '6', '8', '9', '10', '12', '16', '24');
+$shadow-depths: (/*'0', '1', '2', '3', '4', '6', '8', '9', '10', '12', '16', '24'*/);
 @import 'components/shadows'; // Shadow depths (Can be turned off)
 
 @import 'components/typography'; // Typography
@@ -28,7 +28,7 @@ $bottom-nav: ('bottom-nav', 'bottom-shifting');
 $bottom-sheet: ('header', 'grid', 'music');
 //@import 'components/bottom-sheet'; // Used to style bottom sheet / modal (can be turned off)
 
-$button: ('raised', 'flat', 'floating', 'toggle');
+$button: ('raised', 'flat', 'floating', /*'toggle'*/);
 @import 'components/buttons'; // Used to style buttons (can be turned off)
 
 @import 'components/cards'; // Used to style cards (can be turned off)

@@ -28,7 +28,9 @@ $file = str_replace( '.php', '', $_SERVER['PHP_SELF'] );
 <body>
 
 <header class="sc-appbar">
-    <img src="/climate-canary/images/crazycanary_logo_white.png" alt="ClimateCanary logo">
+    <a href="/climate-canary/">
+        <img src="/climate-canary/images/crazycanary_logo_white.png" alt="ClimateCanary logo">
+    </a>
 </header>
 
-<main>
+<main class="container">

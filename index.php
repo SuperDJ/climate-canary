@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
 ?>
 
 <section class="row">
-    <div class="col col-xs-4 col-sm-6">
+    <div class="col col-xs-6 col-sm-6">
         <a href="#" class="sc-card sc-center home">
             <div class="sc-card-supporting">
                 <i class="material-icons">home</i>
@@ -14,8 +14,8 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
     </div>
 
 
-    <div class="col col-xs-4 col-sm-6">
-        <a href="#" class="sc-card sc-center home">
+    <div class="col col-xs-6 col-sm-6">
+        <a href="/climate-canary/navigate-to.php" class="sc-card sc-center home">
             <div class="sc-card-supporting">
                 <i class="material-icons">navigation</i>
                 <span>Navigeer naar</span>
@@ -25,7 +25,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
 </section>
 
 <section class="row">
-    <div class="col col-xs-4 col-sm-6">
+    <div class="col col-xs-6 col-sm-6">
         <a href="#" class="sc-card sc-center home">
             <div class="sc-card-supporting">
                 <i class="material-icons">wb_sunny</i>
@@ -34,7 +34,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
         </a>
     </div>
 
-    <div class="col col-xs-4 col-sm-6">
+    <div class="col col-xs-6 col-sm-6">
         <a href="#" class="sc-card sc-center home">
             <div class="sc-card-supporting">
                 <i class="material-icons">grain</i>
@@ -45,7 +45,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
 </section>
 
 <section class="row">
-    <div class="col col-xs-4 col-sm-6">
+    <div class="col col-xs-6 col-sm-6">
         <a href="#" class="sc-card sc-center home">
             <div class="sc-card-supporting">
                 <i class="material-icons">cloud</i>
@@ -54,7 +54,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
         </a>
     </div>
 
-    <div class="col col-xs-4 col-sm-6">
+    <div class="col col-xs-6 col-sm-6">
         <a href="#" class="sc-card sc-center home">
             <div class="sc-card-supporting">
                 <i class="material-icons">settings</i>

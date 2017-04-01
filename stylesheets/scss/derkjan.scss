@@ -1,10 +1,15 @@
 $main-color: #FFCC33;
+$secondary-color: #fff;
 $background: #EBEBEB;
 @import 'smaterial';
 
 main {
 	background: var(--background, $background);
 	left: 0;
+}
+
+form {
+	width: 100%;
 }
 
 .sc-appbar {
@@ -14,6 +19,7 @@ main {
 
 	img {
 		flex: none;
+		margin: 0 auto;
 	}
 }
 
@@ -47,4 +53,96 @@ img {
 	max-width: 100%;
 	display: block;
 	max-height: 100%;
+}
+
+.colored-background {
+	background: var(--main-color, $main-color);
+
+	label {
+		color: $white;
+	}
+}
+
+input {
+	width: 100%;
+	background: rgba($white, .3);
+	color: $white !important;
+	padding: rem-calc(5px);
+	border: none;
+	outline: none;
+	@include border-radius(var(--border-size, $border-size));
+
+	@include placeholder() {
+		color: rgba($white, .6);
+	}
+
+	&:hover, &:focus {
+		@include placeholder() {
+			color: $white;
+		}
+	}
+}
+
+.sc-raised-button {
+	color: var(--main-color, $main-color) !important;
+	background: var(--secondary-color, $secondary-color) !important;
+
+	.material-icons {
+		color: var(--main-color, $main-color) !important;
+	}
+}
+
+.sc-card-actions {
+	padding: rem-calc(10px) 0;
+}
+
+.quick-nav {
+	position: fixed;
+	right: rem-calc(20px);
+	bottom: rem-calc(20px);
+	background: var(--main-color, $main-color);
+
+	ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		right: 0;
+		bottom: $floating-size + ($floating-sub-size / 2);
+
+		li {
+			background: var(--main-color, $main-color);
+			@include material-shadow(2);
+
+			a {
+				margin-left: 0;
+			}
+		}
+	}
+}
+
+a.divided {
+	color: rgba($black, .26);
+	font-weight: 500;
+	border-bottom: var(--border-size, $border-size) solid rgba($black, .26);
+	padding-bottom: var(--gutter, $gutter);
+	@include transition(all $transition-small-duration $basic-transition);
+
+	@media #{$medium-only} {
+		@include transition(all $transition-medium-duration $basic-transition);
+	}
+
+	@media #{$medium-up} {
+		@include transition(all $transition-large-duration $basic-transition);
+	}
+
+	&:hover {
+		border-bottom: var(--border-size, $border-size) solid var(--main-color, $main-color);
+		color: inherit;
+	}
+}
+
+.row {
+	width: 100%;
+	margin-bottom: var(--gutter, $gutter);
+	padding: 0;
 }

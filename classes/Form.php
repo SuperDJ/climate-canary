@@ -37,7 +37,6 @@ class Form extends Database {
 	 *
 	 * @param array    $source
 	 * @param  array   $items All form fields
-	 * @param callable $translate Translate function
 	 * @param   null   $id    When updating
 	 * @param bool     $html  True or false depending if you want to allow html input
 	 *
@@ -45,7 +44,7 @@ class Form extends Database {
 	 * @internal param $ type  $source $_POST or $_GET
 	 * @internal param $ type  $id     (Optional) Used to check field value with value from database
 	 */
-	public function check( array $source, array $items, callable $translate, $id = null, bool $html = false ) {
+	public function check( array $source, array $items, $id = null, bool $html = false ) {
 		if( !is_array( $items ) ) {
 			return false;
 		}
@@ -67,13 +66,13 @@ class Form extends Database {
 					// Check of empty value
 					case 'required':
 						if( empty( $value ) ) {
-							$this->addError($translate( $rules['name'] ).' '.$translate('is empty'));
+							$this->addError( $rules['name'].' is leeg');
 						}
 						break;
 					// Validate email and make sure its in lower case
 					case 'email':
 						if( !filter_var( $value, FILTER_VALIDATE_EMAIL ) && !preg_match( '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$^', $value ) ) {
-							$this->addError($value.' '.$translate('is not a valid email'));
+							$this->addError($value.' is geen geldig email adres');
 						} else {
 							$source[$item] = strtolower( $value );
 						}
@@ -82,29 +81,29 @@ class Form extends Database {
 					case 'numeric':
 						if( !empty( $rules['required'] ) && $rules['required'] == true ) {
 							if( !is_numeric( $value ) ) {
-								$this->addError( $translate( $rules['name'] ).' '.$translate( 'has to be a number' ) );
+								$this->addError( $rules['name'].' moet een nummer zijn');
 							}
 						} else if( !empty( $value ) ) {
 							if( !is_numeric( $value ) ) {
-								$this->addError( $translate( $rules['name'] ).' '.$translate( 'has to be a number' ) );
+								$this->addError( $rules['name'].' moet een nummer zijn');
 							}
 						}
 						break;
 					// Maximum length
 					case 'maxLength':
 						if( mb_strlen( $value ) > $rule_value ) {
-							$this->addError($translate( $rules['name'] ).' '.$translate('has a maximum of').' '.$rule_value.' '.$translate('characters'));
+							$this->addError($rules['name'].' heeft een maximum van '.$rule_value.' karakters');
 						}
 						break;
 					// Minimal length
 					case 'minLength':
 						if( !empty( $rules['required'] ) && $rules['required'] == true ) {
 							if( mb_strlen( $value ) < $rule_value ) {
-								$this->addError($translate( $rules['name'] ).' '.$translate('has a minimum of').' '.$rule_value.' '.$translate('characters'));
+								$this->addError($rules['name'].' heeft een minimum van '.$rule_value.' karakters');
 							}
 						} else if( !empty( $value ) ) {
 							if( mb_strlen( $value ) < $rule_value ) {
-								$this->addError($translate( $rules['name'] ).' '.$translate('has a minimum of').' '.$rule_value.' '.$translate('characters'));
+								$this->addError($translate( $rules['name'] ).' heeft een minimum van '.$rule_value.' karakters');
 							}
 						}
 						break;
@@ -118,31 +117,31 @@ class Form extends Database {
 							if( $current_value != $value ) {
 								// Check if the value is unique in the database
 								if( $this->exists($item, $rule_value, $item, $value) ) {
-									$this->addError($translate( $rules['name'] ).' '.$value.' '.$translate('already exists'));
+									$this->addError($rules['name'].' '.$value.' bestaat al');
 								}
 							}
 						} else {
 							if( $this->exists($item, $rule_value, $item, $value) && !empty( $value ) ) {
-								$this->addError($translate( $rules['name'] ).' '.$value.' '.$translate('already exists'));
+								$this->addError($rules['name'].' '.$value.' bestaat al');
 							}
 						}
 						break;
 					// Check against other value
 					case 'matches':
 						if( $value != $source[$rule_value] ) {
-							$this->addError($translate( $rules['name'] ).' '.$translate('does not match').' '.$rule_value);
+							$this->addError($rules['name'].' is niet gelijk aan '.$rule_value);
 						}
 						break;
 					// Check if something already exists
 					case 'exists':
 						// If $value is numeric most likely it's an id
 						if( is_numeric( $value ) ) {
-							if( !$this->exists( $item, $rule_value, 'id', $value) ) {
-								$this->addError( $translate( $rules['name'] ).' '.$value.' '.$translate( 'does not exists' ) );
+							if( !$this->exists($item, $rule_value, 'id', $value) ) {
+								$this->addError($rules['name'].' '.$value.' bestaat niet');
 							}
 						} else {
-							if( !$this->exists( $item, $rule_value, $item, $value ) ) {
-								$this->addError( $translate( $rules['name'] ).' '.$value.' '.$translate( 'does not exists' ) );
+							if( !$this->exists($item, $rule_value, $item, $value ) ) {
+								$this->addError($rules['name'].' '.$value.' bestaat niet');
 							}
 						}
 						break;
@@ -176,7 +175,7 @@ class Form extends Database {
 					case 'date':
 						if( !empty( $value ) ) {
 							if( !preg_match('/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/', $value) ) {
-								$this->addError($translate( $rules['name'] ).' '.$translate('has no valid date').' '.$value);
+								$this->addError($rules['name'].' heeft geen geldige datum '.$value);
 							}
 						}
 						break;
@@ -184,7 +183,7 @@ class Form extends Database {
 					case 'time':
 						if( !empty( $value ) ) {
 							if( !preg_match('/([01]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?/', $value) ) {
-								$this->addError($translate( $rules['name'] ).' '.$translate('has no valid time'));
+								$this->addError($rules['name'].' heeft geen geldige tijd');
 							}
 						}
 						break;

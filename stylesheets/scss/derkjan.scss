@@ -146,3 +146,8 @@ a.divided {
 	margin-bottom: var(--gutter, $gutter);
 	padding: 0;
 }
+
+.captcha {
+	display: none;
+	visibility: hidden;
+}

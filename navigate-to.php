@@ -1,11 +1,48 @@
 <?php
 $title = 'Navigeer naar';
-require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 ?>
 <!-- Address input -->
 <section class="row" id="address">
 	<div class="col col-xs-12 col-sm-12">
         <div class="colored-background sc-card sc-card-supporting">
+            <?php
+            $form = new Form();
+			if( $_POST ) {
+			    $validate = $form->check($_POST, array(
+			        'from' => array(
+			            'required' => true,
+                        'name' => 'Van'
+                    ),
+                    'fromLat' => array(
+                        'required' => true,
+                        'name' => 'Van latitude'
+                    ),
+					'fromLng' => array(
+						'required' => true,
+						'name' => 'Van longitude'
+					),
+					'to' => array(
+						'required' => true,
+						'name' => 'Naar'
+					),
+					'toLat' => array(
+						'required' => true,
+						'name' => 'Naar latitude'
+					),
+					'toLng' => array(
+						'required' => true,
+						'name' => 'Naar longitude'
+					)
+                ));
+
+			    if( empty( $form->errors ) ) {
+                    $user->to();
+                } else {
+			        echo $form->outputErrors();
+                }
+			}
+            ?>
 		<form action="" method="post">
 			<div class="row">
 				<div class="col col-xs-2 col-sm-2">
@@ -14,6 +51,8 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
 
 				<div class="col col-xs-10 col-sm-10">
 					<input type="text" name="from" id="from" required placeholder="Huidige locatie">
+                    <input type="text" name="fromLat" id="fromLat" class="captcha">
+                    <input type="text" name="fromLng" id="fromLng" class="captcha">
 				</div>
 			</div>
 
@@ -24,6 +63,8 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
 
 				<div class="col col-xs-10 col-sm-10">
 					<input type="text" name="to" id="to" required placeholder="Bestemming kiezen">
+                    <input type="text" name="toLat" id="toLat" class="captcha">
+                    <input type="text" name="toLng" id="toLng" class="captcha">
 				</div>
 			</div>
 
@@ -78,4 +119,4 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
     </ul>
 </div>
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/includes/footer.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/footer.php';

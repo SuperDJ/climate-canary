@@ -1,6 +1,6 @@
 <?php
 $title = 'Home';
-require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 ?>
 
 <section class="row">
@@ -64,4 +64,4 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
     </div>
 </section>
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/includes/footer.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/footer.php';

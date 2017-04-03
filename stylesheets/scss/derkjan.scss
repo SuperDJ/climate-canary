@@ -1,7 +1,15 @@
 $main-color: #FFCC33;
 $secondary-color: #fff;
 $background: #EBEBEB;
+$font-color-display-4: rgba(#000, .26);
+$font-color-headline: $font-color-display-4;
+
 @import 'smaterial';
+
+:root {
+	--font-color-1: $font-color-display-4;
+	--font-color-2: $font-color-display-4;
+}
 
 main {
 	background: var(--background, $background);
@@ -61,6 +69,28 @@ img {
 	label {
 		color: $white;
 	}
+
+	.sc-raised-button {
+		color: var(--main-color, $main-color) !important;
+		background: var(--secondary-color, $secondary-color) !important;
+
+		.material-icons {
+			color: var(--main-color, $main-color) !important;
+		}
+	}
+}
+
+.colored {
+	color: var(--main-color, $main-color);
+}
+
+.sc-raised-button {
+	color: var(--secondary-color, $secondary-color) !important;
+	background: var(--main-color, $main-color) !important;
+
+	.material-icons {
+		color: var(--secondary-color, $secondary-color) !important;
+	}
 }
 
 input {
@@ -80,15 +110,6 @@ input {
 		@include placeholder() {
 			color: $white;
 		}
-	}
-}
-
-.sc-raised-button {
-	color: var(--main-color, $main-color) !important;
-	background: var(--secondary-color, $secondary-color) !important;
-
-	.material-icons {
-		color: var(--main-color, $main-color) !important;
 	}
 }
 
@@ -141,7 +162,7 @@ a.divided {
 	}
 }
 
-.row {
+.navigate-to .row {
 	width: 100%;
 	margin-bottom: var(--gutter, $gutter);
 	padding: 0;
@@ -151,3 +172,47 @@ a.divided {
 	display: none;
 	visibility: hidden;
 }
+
+.map-confirmation {
+	width: 100%;
+	height: rem-calc(350px);
+	left: 0;
+	position: fixed !important;
+	top: $appbar-mobile-portrait-height;
+
+	@media only screen and (orientation: landscape) and (max-width: #{$small-screen}) {
+		top: $appbar-mobile-landscape-height;
+	}
+
+	@media only screen and (orientation: portrait) and (max-width: #{$xsmall-screen}) {
+		top: $appbar-mobile-portrait-height;
+	}
+
+	@media #{$small-up} {
+		top: $appbar-large-height;
+	}
+}
+
+.navigation-confirm {
+	--background: $white;
+
+	.details {
+		position: inherit;
+		font-weight: 500;
+		font-size: rem-calc(16px);
+		top: rem-calc(350px) + $gutter + $appbar-mobile-portrait-height;
+
+		@media only screen and (orientation: landscape) and (max-width: #{$small-screen}) {
+			top: rem-calc(350px) + $gutter + $appbar-mobile-landscape-height;
+		}
+
+		@media only screen and (orientation: portrait) and (max-width: #{$xsmall-screen}) {
+			top: rem-calc(350px) + $gutter + $appbar-mobile-portrait-height;
+		}
+
+		@media #{$small-up} {
+			top: rem-calc(350px) + $gutter + $appbar-large-height;
+		}
+	}
+}
+

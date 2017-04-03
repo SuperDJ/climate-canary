@@ -44,7 +44,7 @@ class Form extends Database {
 	 * @internal param $ type  $source $_POST or $_GET
 	 * @internal param $ type  $id     (Optional) Used to check field value with value from database
 	 */
-	public function check( array $source, array $items, $id = null, bool $html = false ) {
+	public function check( array $source, array $items, $id = null, $html = false ) {
 		if( !is_array( $items ) ) {
 			return false;
 		}
@@ -203,6 +203,15 @@ class Form extends Database {
 							$source[$item] = 0;
 						}
 						break;
+					case 'latitude':
+						if( !preg_match( '/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/' ) ) {
+							$this->addError($rules['name'].' is geen geldige latitude');
+						}
+						break;
+					case 'longitude':
+						if( !preg_match( '/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/' ) ) {
+							$this->addError($rules['name'].' is geen gelidge longitude');
+						}
 				}
 				$this->return[$item] = $value;
 			}
@@ -224,7 +233,7 @@ class Form extends Database {
 	 * Add error messages to array
 	 * @param string $error The error message
 	 */
-	private function addError( string $error ) {
+	private function addError( $error ) {
 		$this->errors[] = $error;
 	}
 
@@ -280,7 +289,7 @@ class Form extends Database {
 	 *
 	 * @return bool
 	 */
-	public function media( array $data, callable $translate, string $type = '' ) {
+	public function media( array $data, callable $translate, $type = '' ) {
 		$totalFiles = count($data);
 
 		$i = 0;

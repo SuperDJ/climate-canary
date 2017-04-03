@@ -121,7 +121,7 @@ $letter-spacing-button: 0.1; // Default 0.1
 }
 
 body {
-	@include font($font-size-body-1, $font-size-small-body, 300, $line-height-body-1, $font-color-body-1, $letter-spacing-body-1);
+	@include font($font-size-body-1, $font-size-small-body, 300, $line-height-body-1, $font-color-body-1 !important, $letter-spacing-body-1);
 	direction: $text-direction;
 	font-family: 'Montserrat', sans-serif, 'Helvetica Neue', Helvetica, Arial !important;
 	text-rendering: optimizeLegibility;

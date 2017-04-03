@@ -1,5 +1,10 @@
 <?php
+// Load file that runs everything
+require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/core/engine.php';
+
 $file = str_replace( '.php', '', $_SERVER['PHP_SELF'] );
+$file = str_replace( ' ', '-', $file);
+$file = str_replace('/climate-canary/', '', $file);
 ?>
 <!DOCTYPE html>
 <html lang="NL">
@@ -20,12 +25,12 @@ $file = str_replace( '.php', '', $_SERVER['PHP_SELF'] );
 	<meta property="og:site_name" content="ClimateCanary">
 	<meta property="article:section" content="<?php echo $title; ?>">
 
-	<meta name="theme-color" content="#FFEB3B">
-	<meta name="msapplication-navbutton-color" content="#FFEB3B">
-	<meta name="apple-mobile-web-app-status-bar-style" content="#FFEB3B">
+	<meta name="theme-color" content="#FFCC33">
+	<meta name="msapplication-navbutton-color" content="#FFCC33">
+	<meta name="apple-mobile-web-app-status-bar-style" content="#FFCC33">
 </head>
 
-<body>
+<body class="<?php echo $file; ?>">
 
 <header class="sc-appbar">
     <a href="/climate-canary/">

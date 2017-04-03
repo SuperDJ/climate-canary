@@ -11,7 +11,7 @@ mb_internal_encoding( 'UTF-8' );
 $date = new DateTime( null, new DateTimeZone( 'Europe/Amsterdam' ) );
 
 // Set global variables
-$root = $_SERVER['DOCUMENT_ROOT'].'/climate-canary/';
+$root = $_SERVER['DOCUMENT_ROOT'].'/';
 set_include_path( $root );
 require_once 'core/defines.php';
 

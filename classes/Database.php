@@ -4,18 +4,20 @@
  * Handles database connection and database requests
  */
 class Database {
-	protected $mysqli;
+	protected $mysqli = false;
 
 	// Set database credentials
 	private $_db = array();
 
 	function __construct() {
 		// Credentials
-		if( file_exists( ROOT.'credentials.json' ) ) {
-			$this->_db = json_decode( file_get_contents( ROOT.'credentials.json' ) );
+		if( file_exists( $_SERVER['DOCUMENT_ROOT'].'/climate-canary/credentials.json' ) ) {
+			$this->_db = json_decode( file_get_contents( $_SERVER['DOCUMENT_ROOT'].'/climate-canary/credentials.json' ) );
 
 			// Get connection
-			$this->connect();
+			if( !$this->mysqli ) {
+				$this->connect();
+			}
 		} else {
 			echo 'Could not connect to db';
 		}
@@ -27,6 +29,7 @@ class Database {
 	private function connect() {
 		$mysqli = new PDO('mysql:host='.$this->_db->database->host.';dbname='.$this->_db->database->database.';charset=utf8', $this->_db->database->username, $this->_db->database->password);
 
+		// Only execute when in test mode
 		if( TEST ) {
 			$mysqli->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$mysqli->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
@@ -77,7 +80,7 @@ class Database {
 
 		if( $stmt->rowCount() >= 1 ) {
 			$stmt = null;
-		 	return true;
+			return true;
 		} else {
 			$stmt = null;
 			return false;

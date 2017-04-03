@@ -8,6 +8,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
         <div class="colored-background sc-card sc-card-supporting">
             <?php
             $form = new Form();
+
 			if( $_POST ) {
 			    $validate = $form->check($_POST, array(
 			        'from' => array(
@@ -37,7 +38,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
                 ));
 
 			    if( empty( $form->errors ) ) {
-                    $user->to();
+                    $user->to('navigation-confirm.php?from='.$validate['from'].'&fromLat='.$validate['fromLat'].'&fromLng='.$validate['fromLng'].'&to='.$validate['to'].'&toLat='.$validate['toLat'].'&toLng='.$validate['toLng']);
                 } else {
 			        echo $form->outputErrors();
                 }

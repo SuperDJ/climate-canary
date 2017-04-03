@@ -1,19 +1,70 @@
 $(document).ready(function() {
-	navigator.geolocation.getCurrentPosition(initialize);
+	/**
+	 * Get current location
+	 */
+	function getCurrentCoords(fn) {
+		$.post('https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyAB9kYP7clJyhX45mt6y3LobeKA9L6ivNo').done(function(success) {
+			var $obj = {lat: success.location.lat, lng: success.location.lng};
+			fn($obj);
+		})
+		.fail(function(err) {
+			console.log("API Geolocation error! \n\n"+err);
+			return false;
+		});
+	}
+
+	/**
+	 * Get coords from address
+	 *
+	 * @param $address
+	 */
+	function getCoords($address, fn) {
+		var $coords;
+		$.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address='+$address+'&key=AIzaSyAB9kYP7clJyhX45mt6y3LobeKA9L6ivNo').done(function($data) {
+			$coords = $data.results[0].geometry.location;
+
+			if( !empty($coords) ) {
+				fn($coords);
+			} else {
+				return false;
+			}
+		});
+	}
+
+	/**
+	 * Get Address from coords
+	 */
+	function getAddress($coords, fn) {
+		var $address;
+		$.getJSON('https://maps.googleapis.com/maps/api/geocode/json?latlng='+$coords.lat+','+$coords.lng+'&key=AIzaSyAB9kYP7clJyhX45mt6y3LobeKA9L6ivNo').done(function($data) {
+			$address = $data.results[0].formatted_address;
+
+			if( !empty($address) ) {
+				fn($address);
+			} else {
+				return false;
+			}
+		});
+	}
+
+	// Set current Address
+	getCurrentCoords( function(e) {
+		getAddress( e, function ( a ) {
+			$('#from').val(a);
+			$('#fromLat').val(e.lat);
+			$('#fromLng').val(e.lng);
+		} );
+	});
 });
 
-var $from = document.getElementById('from'),
-	$to = document.getElementById('to'),
-	$fromLat = document.getElementById('fromLat'),
-	$fromLng = document.getElementById('fromLng'),
+var $to = document.getElementById('to'),
 	$toLat = document.getElementById('toLat'),
 	$toLng = document.getElementById('toLng'),
 	$autocomplete;
 
 function initialize(location) {
 	// Get current location coords
-	var $location = {lat: location.coords.latitude, lng: location.coords.longitude},
-		$geocoder = new google.maps.Geocoder;
+	var $geocoder = new google.maps.Geocoder;
 
 	// Set from coords
 	$fromLat.value = location.coords.latitude;
@@ -49,6 +100,13 @@ initAutocomplete();
 function fillInAddress() {
 	// Get the place details from the autocomplete object.
 	var $place = $autocomplete.getPlace();
+	console.log($place);
+	console.log($place.geometry.location.lat());
+	console.log($place.geometry.location.lng());
 	$toLat.value = $place.geometry.location.lat();
 	$toLng.value = $place.geometry.location.lng();
+
+	console.log($toLat.value);
+	console.log($toLng.value);
 }
+

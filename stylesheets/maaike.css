@@ -1,0 +1,40 @@
+/***********************/
+/* HOME                */
+/***********************/
+
+a.sc-card.home{
+    background-color: var(--secondary-color);
+}
+
+div.sc-card-supporting.home{
+    background-color: var(--secondary-color);
+    display: block;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 0;
+    margin: 5px;
+}
+
+/***********************/
+/* DETAIL              */
+/***********************/
+
+
+div.col-sm-12.return{
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: var(--secondary-color);
+}
+
+div.col-sm-12.content{
+    background-color: var(--secondary-color);
+    margin-top: 1px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-weight: 500;
+}
+
+div.col-sm-12.content h1{
+    margin: 0;
+}

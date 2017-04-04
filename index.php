@@ -26,7 +26,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 
 <section class="row">
     <div class="col col-xs-6 col-sm-6">
-        <a href="#" class="sc-card sc-center home">
+        <a href="/climate-canary/temperature.php" class="sc-card sc-center home">
             <div class="sc-card-supporting">
                 <i class="material-icons">wb_sunny</i>
                 <span>Temperatuur</span>
@@ -35,7 +35,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
     </div>
 
     <div class="col col-xs-6 col-sm-6">
-        <a href="#" class="sc-card sc-center home">
+        <a href="/climate-canary/carbon-dioxide.php" class="sc-card sc-center home">
             <div class="sc-card-supporting">
                 <i class="material-icons">grain</i>
                 <span>CO<sub>2</sub> gehalte</span>
@@ -46,7 +46,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 
 <section class="row">
     <div class="col col-xs-6 col-sm-6">
-        <a href="#" class="sc-card sc-center home">
+        <a href="/climate-canary/humidity.php" class="sc-card sc-center home">
             <div class="sc-card-supporting">
                 <i class="material-icons">cloud</i>
                 <span>Luchtvochigheid</span>
@@ -55,7 +55,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
     </div>
 
     <div class="col col-xs-6 col-sm-6">
-        <a href="#" class="sc-card sc-center home">
+        <a href="/climate-canary/settings.php" class="sc-card sc-center home">
             <div class="sc-card-supporting">
                 <i class="material-icons">settings</i>
                 <span>Instellingen</span>

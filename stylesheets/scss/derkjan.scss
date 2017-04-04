@@ -71,11 +71,15 @@ img {
 	}
 
 	.sc-raised-button {
-		color: var(--main-color, $main-color) !important;
-		background: var(--secondary-color, $secondary-color) !important;
+		color: var(--main-color, $main-color);
+		background: var(--secondary-color, $secondary-color);
+
+		&:hover {
+			color: var(--main-color, $main-color);
+		}
 
 		.material-icons {
-			color: var(--main-color, $main-color) !important;
+			color: var(--main-color, $main-color);
 		}
 	}
 }
@@ -85,11 +89,17 @@ img {
 }
 
 .sc-raised-button {
-	color: var(--secondary-color, $secondary-color) !important;
-	background: var(--main-color, $main-color) !important;
+	margin-bottom: rem-calc(10px);
+	text-decoration: none !important;
+	color: var(--secondary-color, $secondary-color);
+	background: var(--main-color, $main-color);
 
 	.material-icons {
-		color: var(--secondary-color, $secondary-color) !important;
+		color: var(--secondary-color, $secondary-color);
+	}
+
+	&.grey {
+		background: var(--background, $background);
 	}
 }
 
@@ -162,7 +172,7 @@ a.divided {
 	}
 }
 
-.navigate-to .row {
+.row .row {
 	width: 100%;
 	margin-bottom: var(--gutter, $gutter);
 	padding: 0;
@@ -194,7 +204,9 @@ a.divided {
 }
 
 .navigation-confirm {
-	--background: $white;
+	main {
+		background: var(--secondary-color, $secondary-color);
+	}
 
 	.details {
 		position: inherit;
@@ -214,5 +226,9 @@ a.divided {
 			top: rem-calc(350px) + $gutter + $appbar-large-height;
 		}
 	}
+}
+
+a {
+	text-decoration: none;
 }
 

@@ -6,7 +6,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 <div class="row">
     <div class="col-sm-12 return">
         <div class="">
-            <span>RETURN</span>
+            <a href="index.php">Terug</a>
         </div>
     </div>
 

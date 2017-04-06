@@ -1,0 +1,24 @@
+h1 {
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 2em;
+}
+
+#whiteblock {
+    padding: 50px;
+}
+
+button {
+    background: var(--main-color);
+    color: white;
+    font-weight: bold;
+}
+
+button:hover {
+    background: white;
+    color: black;
+}

@@ -50,9 +50,24 @@ $(document).ready(function() {
 	// Set current Address
 	getCurrentCoords( function(e) {
 		getAddress( e, function ( a ) {
+			// Set data in form fields
 			$('#from').val(a);
 			$('#fromLat').val(e.lat);
 			$('#fromLng').val(e.lng);
+
+			// Create url for each saved address
+			$('.address').each(function() {
+				var $this = $(this),
+					$url = $this.attr('href');
+
+				if( $url != '#' ) {
+					$url = $url.replace('fAddress', a);
+					$url = $url.replace('fLat', e.lat);
+					$url = $url.replace('fLng', e.lng);
+
+					$this.attr('href', $url);
+				}
+			});
 		} );
 	});
 });

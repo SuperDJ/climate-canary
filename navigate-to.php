@@ -7,7 +7,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 	<div class="col col-xs-12 col-sm-12">
         <div class="colored-background sc-card sc-card-supporting">
             <?php
-            $form = new Form();
+            $form = new Form($db);
 
 			if( $_POST ) {
 			    $validate = $form->check($_POST, array(
@@ -38,7 +38,19 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
                 ));
 
 			    if( empty( $form->errors ) ) {
-                    $user->to('navigation-confirm.php?from='.$validate['from'].'&fromLat='.$validate['fromLat'].'&fromLng='.$validate['fromLng'].'&to='.$validate['to'].'&toLat='.$validate['toLat'].'&toLng='.$validate['toLng']);
+			        // Create usable array for insert
+			        $data = array(
+			            'address' => $validate['to'],
+                        'latitude' => $validate['toLat'],
+                        'longitude' => $validate['toLng']
+                    );
+
+			        // Add address to database
+			        if( $address->add($data) ) {
+						$user->to( 'navigation-confirm.php?from='.$validate['from'].'&fromLat='.$validate['fromLat'].'&fromLng='.$validate['fromLng'].'&to='.$validate['to'].'&toLat='.$validate['toLat'].'&toLng='.$validate['toLng'] );
+					} else {
+			            echo '<div class="error sc-card sc-card-supporting-additional">Er is iets mis gegaan met het toevoegen van het adres</div>';
+                    }
                 } else {
 			        echo $form->outputErrors();
                 }
@@ -70,7 +82,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 			</div>
 
             <div class="sc-card-actions">
-                <button class="sc-raised-button"><i class="material-icons">directions</i> Navigeren</button>
+                <button class="sc-raised-button"><i class="material-icons">directions</i> Oke</button>
             </div>
 		</form>
         </div>
@@ -81,25 +93,44 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 <section class="row" id="history">
     <div class="col col-xs-12 col-sm-12">
         <div class="sc-card sc-card-supporting">
-            <a href="#" class="row divided">
-                <div class="col col-xs-2 col-sm-2">
-                    <i class="material-icons">access_time</i>
-                </div>
+            <h2>Geschiedenis</h2>
+            <?php
+            $data = $address->data();
 
-                <div class="col col-xs-10 col-sm-10">
-                    McDonalds Schulpen Plein
-                </div>
-            </a>
-
-            <a href="#" class="row divided">
-                <div class="col col-xs-2 col-sm-2">
-                    <i class="material-icons">access_time</i>
-                </div>
-
-                <div class="col col-xs-10 col-sm-10">
-                    Zernikeplein 11
-                </div>
-            </a>
+            if( empty( $data ) ) {
+                echo '  <a href="#" class="row divided">
+                            <div class="col col-xs-2">
+                                <i class="material-icons">clear</i>
+                            </div>
+            
+                            <div class="col col-xs-10 col-sm-10">
+                                Geen resultaten gevonden
+                            </div>
+                        </a>';
+            } else {
+                foreach( $data as $row => $field ) {
+					echo '  <div class="row divided">
+                                <div class="col col-xs-2">
+                                    <i class="material-icons">'.$field['icon'].'</i>
+                                </div>
+                
+                                <a href="navigation-confirm.php?from=fAddress&fromLat=fLat&fromLng=fLng&to='.$field['address'].'&toLat='.$field['latitude'].'&toLng='.$field['longitude'].'" class="col col-xs-7 address">
+                                    '.( !empty( $field['name'] ) ? $field['name'] : $field['address'] ).'
+                                </a>
+                                
+                                <div class="col col-xs-3">
+                                    <div class="col col-xs-6">
+                                        <a href="address-edit.php?id='.base64_encode($field['id']).'"><i class="material-icons">edit</i></a>
+                                    </div>
+                                    
+                                    <div class="col col-xs-6">
+                                        <a href="address-delete.php?id='.base64_encode($field['id']).'"><i class="material-icons">delete</i></a>
+                                    </div>
+                                </div>
+                            </div>';
+                }
+            }
+            ?>
         </div>
     </div>
 </section>

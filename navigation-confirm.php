@@ -68,7 +68,21 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
 					console.log(data);
 
 					// Show time and distance
-					time.innerText = data.duration.text;
+                    var duration = '';
+
+                    if( data.duration.text.indexOf('hours') >= 0 ) {
+                    	duration = data.duration.text.replace('hours', 'uur');
+                    }
+
+					if( data.duration.text.indexOf('hour') >= 0 ) {
+						duration = data.duration.text.replace('hour', 'uur');
+					}
+
+					if( duration.indexOf('mins') >= 0 ) {
+						duration = duration.replace('mins', 'minuten');
+					}
+
+					time.innerText = duration;
 					distance.innerText = data.distance.text;
 
 					directionsDisplay.setDirections(response);

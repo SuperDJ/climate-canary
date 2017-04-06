@@ -33,6 +33,7 @@ spl_autoload_register(function( $class ) {
 });
 
 $db = new Database();
-$user = new User();
+$user = new User($db);
 $session = new Session();
 $cookie = new Cookie();
+$address = new Address($db);

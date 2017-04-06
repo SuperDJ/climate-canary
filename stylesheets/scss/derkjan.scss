@@ -101,6 +101,15 @@ img {
 	&.grey {
 		background: var(--background, $background);
 	}
+
+	&:hover {
+		color: var(--secondary-color, $secondary-color);
+		background: var(--main-color, $main-color);
+
+		.material-icons {
+			color: var(--secondary-color, $secondary-color);
+		}
+	}
 }
 
 input {
@@ -151,24 +160,18 @@ input {
 	}
 }
 
-a.divided {
+.row.divided {
 	color: rgba($black, .26);
 	font-weight: 500;
 	border-bottom: var(--border-size, $border-size) solid rgba($black, .26);
 	padding-bottom: var(--gutter, $gutter);
-	@include transition(all $transition-small-duration $basic-transition);
 
-	@media #{$medium-only} {
-		@include transition(all $transition-medium-duration $basic-transition);
-	}
+	a {
+		color: rgba($black, .26);
 
-	@media #{$medium-up} {
-		@include transition(all $transition-large-duration $basic-transition);
-	}
-
-	&:hover {
-		border-bottom: var(--border-size, $border-size) solid var(--main-color, $main-color);
-		color: inherit;
+		&:hover {
+			color: $black;
+		}
 	}
 }
 
@@ -229,6 +232,13 @@ a.divided {
 }
 
 a {
-	text-decoration: none;
+	text-decoration: none !important;
 }
 
+.error {
+	background: $red;
+}
+
+.address-edit main {
+	background: var(--secondary-color, $secondary-color);
+}

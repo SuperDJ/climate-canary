@@ -15,48 +15,49 @@ if( !empty( $_GET['id'] ) ) {
 					'minLength' => 2,
 					'name' => 'Naam'
 				),
-				'category' => array(
+				'icons_id' => array(
 					'required' => true,
 					'numeric' => true,
+					'unique' => 'address',
 					'name' => 'Categorie'
 				)
 			), $id);
 
 			if( empty( $form->errors ) ) {
-				// Check if certain category isn't taken
-				if( $db->exists('icons_id', 'address', 'icons_id', 1) ) {
-					echo '<div class="error sc-card sc-card-supporting">Thuis adres is al ingesteld. Wijzig eerst het huidige thuis adres</div>';
-				} else {
-					if( $address->edit($validation)) {
-						$user->to('/climate-canary/navigate-to.php');
-					} else {
-						echo '<div class="error sc-card sc-card-supporting">Adres kon niet worden gewijzigd</div>';
-					}
-				}
+                if( $address->edit($validation)) {
+                    $user->to('/climate-canary/navigate-to.php');
+                } else {
+                    echo '<div class="error sc-card sc-card-supporting">Adres kon niet worden gewijzigd</div>';
+                }
 			} else {
 				echo $form->outputErrors();
 			}
 		}
 ?>
-	 <form action="" method="post" autocomplete="off">
-		 <div class="sc-floating-input">
-			 <input type="text" name="name" id="name" value="<?php echo ( !empty( $form->input('name') ) ? $form->input('name') : $data['name'] ); ?>">
-			 <label for="name">Naam</label>
-		 </div>
+     <div class="row">
+         <div class="col col-xs-12">
+             <form action="" method="post" autocomplete="off">
+                 <h2><?php echo $db->detail('address', 'address', 'id', $id); ?></h2>
+                 <div class="sc-floating-input">
+                     <input type="text" name="name" id="name" value="<?php echo ( !empty( $form->input('name') ) ? $form->input('name') : $data['name'] ); ?>">
+                     <label for="name">Naam</label>
+                 </div>
 
-		 <select name="category" id="category">
-			 <?php
-			 foreach( $address->categories() as $row => $field ) {
-			 	echo '<option value='.$field['id'].'>'.$field['category'].'</option>';
-			 }
-			 ?>
-		 </select>
+                 <select name="icons_id" id="category">
+					 <?php
+					 foreach( $address->categories() as $row => $field ) {
+						 echo '<option value='.$field['id'].'>'.$field['category'].'</option>';
+					 }
+					 ?>
+                 </select>
 
-		 <button class="sc-raised-button">
-			 <i class="material-icons">save</i>
-			 Opslaan
-		 </button>
-	 </form>
+                 <button class="sc-raised-button">
+                     <i class="material-icons">save</i>
+                     Opslaan
+                 </button>
+             </form>
+         </div>
+     </div>
 <?php
 	} else {
 		$user->to( '/climate-canary/navigate-to.php' );

@@ -74,12 +74,17 @@ img {
 		color: var(--main-color, $main-color);
 		background: var(--secondary-color, $secondary-color);
 
-		&:hover {
+		.material-icons {
 			color: var(--main-color, $main-color);
 		}
 
-		.material-icons {
+		&:hover {
 			color: var(--main-color, $main-color);
+			background: var(--secondary-color, $secondary-color);
+
+			.material-icons {
+				color: var(--main-color, $main-color);
+			}
 		}
 	}
 }
@@ -237,8 +242,14 @@ a {
 
 .error {
 	background: $red;
+	color: $white;
+	font-weight: 500;
 }
 
 .address-edit main {
 	background: var(--secondary-color, $secondary-color);
+}
+
+.navigate-to .sc-card {
+	margin-bottom: var(--gutter, $gutter);
 }

@@ -6,6 +6,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 <section class="row" id="address">
 	<div class="col col-xs-12 col-sm-12">
         <div class="colored-background sc-card sc-card-supporting">
+            <h2>Navigeren</h2>
             <?php
             $form = new Form($db);
 
@@ -137,7 +138,48 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 
 <!-- Favorites -->
 <section class="row" id="favorites">
+    <div class="col col-xs-12 col-sm-12">
+        <div class="sc-card sc-card-supporting">
+            <h2>Favorieten</h2>
+			<?php
+			$data = $address->favorites();
 
+			if( empty( $data ) ) {
+				echo '  <a href="#" class="row divided">
+                            <div class="col col-xs-2">
+                                <i class="material-icons">clear</i>
+                            </div>
+            
+                            <div class="col col-xs-10 col-sm-10">
+                                Geen resultaten gevonden
+                            </div>
+                        </a>';
+			} else {
+				foreach( $data as $row => $field ) {
+					echo '  <div class="row divided">
+                                <div class="col col-xs-2">
+                                    <i class="material-icons">'.$field['icon'].'</i>
+                                </div>
+                
+                                <a href="navigation-confirm.php?from=fAddress&fromLat=fLat&fromLng=fLng&to='.$field['address'].'&toLat='.$field['latitude'].'&toLng='.$field['longitude'].'" class="col col-xs-7 address">
+                                    '.( !empty( $field['name'] ) ? $field['name'] : $field['address'] ).'
+                                </a>
+                                
+                                <div class="col col-xs-3">
+                                    <div class="col col-xs-6">
+                                        <a href="address-edit.php?id='.base64_encode($field['id']).'"><i class="material-icons">edit</i></a>
+                                    </div>
+                                    
+                                    <div class="col col-xs-6">
+                                        <a href="address-delete.php?id='.base64_encode($field['id']).'"><i class="material-icons">delete</i></a>
+                                    </div>
+                                </div>
+                            </div>';
+				}
+			}
+			?>
+        </div>
+    </div>
 </section>
 
 <!-- Navigation button -->

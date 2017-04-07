@@ -113,9 +113,9 @@ class Address {
 	 * @return bool
 	 */
 	public function edit( $data ) {
-		$stmt = $this->_db->mysqli->prepare("UPDATE `address` SET `name` = :name, `icons_id` = :category WHERE `id` = :id");
+		$stmt = $this->_db->mysqli->prepare("UPDATE `address` SET `name` = :name, `icons_id` = :icons_id WHERE `id` = :id");
 		$stmt->bindParam(':name', $data['name'], PDO::PARAM_STR);
-		$stmt->bindParam(':category', $data['category'], PDO::PARAM_INT);
+		$stmt->bindParam(':icons_id', $data['icons_id'], PDO::PARAM_INT);
 		$stmt->bindParam(':id', $data['id'], PDO::PARAM_INT);
 		$stmt->execute();
 
@@ -135,6 +135,32 @@ class Address {
 	 */
 	public function categories() {
 		$stmt = $this->_db->mysqli->prepare("SELECT `id`, `icon`, `category` FROM `icons`");
+		$stmt->execute();
+
+		if( $stmt->rowCount() >= 1 ) {
+			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			$stmt = null;
+			return $result;
+		} else {
+			$stmt = null;
+			return false;
+		}
+	}
+
+	/**
+	 * Get all favorites
+	 *
+	 * @return bool
+	 */
+	public function favorites() {
+		$query = "
+			SELECT `a`.`id`, `address`, `name`, `latitude`, `longitude`, `icons_id`, `icon` 
+			FROM `address` `a`
+			JOIN `icons` `i`
+				ON `i`.`id` = `a`.`icons_id`
+			WHERE `icons_id` != 4	
+		";
+		$stmt = $this->_db->mysqli->prepare($query);
 		$stmt->execute();
 
 		if( $stmt->rowCount() >= 1 ) {

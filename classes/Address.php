@@ -172,4 +172,18 @@ class Address {
 			return false;
 		}
 	}
+
+	public function getHomeUrl() {
+		$stmt = $this->_db->mysqli->prepare("SELECT `address`, `longitude`, `latitude` FROM `address` WHERE `icons_id` = 1");
+		$stmt->execute();
+
+		if( $stmt->rowCount() >= 1 ) {
+			$result = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+			$stmt = null;
+			return 'navigation-confirm.php?from=fAddress&fromLat=fLat&fromLng=fLng&to='.$result['address'].'&toLat='.$result['latitude'].'&toLng='.$result['longitude'];
+		} else {
+			$stmt = null;
+			return 'navigate-to.php';
+		}
+	}
 }

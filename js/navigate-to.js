@@ -55,6 +55,10 @@ $(document).ready(function() {
 			$('#fromLat').val(e.lat);
 			$('#fromLng').val(e.lng);
 
+			if( $('.index').length >= 1 ) {
+				$('')
+			}
+
 			// Create url for each saved address
 			$('.address').each(function() {
 				var $this = $(this),
@@ -70,6 +74,15 @@ $(document).ready(function() {
 			});
 		} );
 	});
+
+	//console.log($fLat);
+	function getRouteData( $fLat, $fLng, $tLat, $tLng, fn ) {
+		$.getJSON('https://maps.googleapis.com/maps/api/directions/json?origin='+$fLat+','+$fLng+'&destination='+$tLat+','+$tLng+'&key=AIzaSyAB9kYP7clJyhX45mt6y3LobeKA9L6ivNo').done(function($data) {
+			console.log($data);
+		});
+	}
+
+
 });
 
 var $to = document.getElementById('to'),

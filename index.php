@@ -5,7 +5,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 
 <section class="row">
     <div class="col col-xs-6 col-sm-6">
-        <a href="#" class="sc-card sc-center home">
+        <a href="/climate-canary/<?php echo $address->getHomeUrl(); ?>" class="sc-card sc-center home address">
             <div class="sc-card-supporting">
                 <i class="material-icons">home</i>
                 <span>Naar huis</span>

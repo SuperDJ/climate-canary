@@ -105,6 +105,10 @@ img {
 
 	&.grey {
 		background: var(--background, $background);
+
+		&:hover {
+			background: var(--background, $background);
+		}
 	}
 
 	&:hover {

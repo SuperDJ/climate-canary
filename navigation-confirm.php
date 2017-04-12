@@ -63,26 +63,9 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
 				travelMode: 'DRIVING'
 			}, function(response, status) {
 				if (status === 'OK') {
-					console.log(response);
 					var data = response.routes[0].legs[0];
-					console.log(data);
 
-					// Show time and distance
-                    var duration = '';
-
-                    if( data.duration.text.indexOf('hours') >= 0 ) {
-                    	duration = data.duration.text.replace('hours', 'uur');
-                    }
-
-					if( data.duration.text.indexOf('hour') >= 0 ) {
-						duration = data.duration.text.replace('hour', 'uur');
-					}
-
-					if( duration.indexOf('mins') >= 0 ) {
-						duration = duration.replace('mins', 'minuten');
-					}
-
-					time.innerText = duration;
+					time.innerText = data.duration.text;
 					distance.innerText = data.distance.text;
 
 					directionsDisplay.setDirections(response);

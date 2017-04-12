@@ -265,7 +265,7 @@ function array_diff_assoc_recursive( array $array1, array $array2 ) {
 		}
 	}
 
-	if( !isset( $difference) ) {
+	if( !isset( $difference ) ) {
 		return false;
 	} else {
 		return $difference;

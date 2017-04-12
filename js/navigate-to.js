@@ -51,27 +51,27 @@ $(document).ready(function() {
 	getCurrentCoords( function(e) {
 		getAddress( e, function ( a ) {
 			// Set data in form fields
-			$('#from').val(a);
-			$('#fromLat').val(e.lat);
-			$('#fromLng').val(e.lng);
-
-			if( $('.index').length >= 1 ) {
-				$('')
+			if( $('#from').length >= 1 ) {
+				$( '#from' ).val( a );
+				$( '#fromLat' ).val( e.lat );
+				$( '#fromLng' ).val( e.lng );
 			}
 
 			// Create url for each saved address
-			$('.address').each(function() {
-				var $this = $(this),
-					$url = $this.attr('href');
+			if( $('.address').length >= 1 ) {
+				$( '.address' ).each( function () {
+					var $this = $( this ),
+						$url = $this.attr( 'href' );
 
-				if( $url != '#' ) {
-					$url = $url.replace('fAddress', a);
-					$url = $url.replace('fLat', e.lat);
-					$url = $url.replace('fLng', e.lng);
+					if( $url != '#' ) {
+						$url = $url.replace( 'fAddress', a );
+						$url = $url.replace( 'fLat', e.lat );
+						$url = $url.replace( 'fLng', e.lng );
 
-					$this.attr('href', $url);
-				}
-			});
+						$this.attr( 'href', $url );
+					}
+				} );
+			}
 		} );
 	});
 
@@ -128,13 +128,13 @@ initAutocomplete();
 function fillInAddress() {
 	// Get the place details from the autocomplete object.
 	var $place = $autocomplete.getPlace();
-	console.log($place);
+	/*console.log($place);
 	console.log($place.geometry.location.lat());
-	console.log($place.geometry.location.lng());
+	console.log($place.geometry.location.lng());*/
 	$toLat.value = $place.geometry.location.lat();
 	$toLng.value = $place.geometry.location.lng();
 
-	console.log($toLat.value);
-	console.log($toLng.value);
+	/*console.log($toLat.value);
+	console.log($toLng.value);*/
 }
 

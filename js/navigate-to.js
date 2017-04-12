@@ -81,8 +81,6 @@ $(document).ready(function() {
 			console.log($data);
 		});
 	}
-
-
 });
 
 var $to = document.getElementById('to'),

@@ -4,7 +4,13 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 ?>
 
     <div class="row">
-        <div class="col col-xs-12">
+        <div class="col-sm-12 return">
+            <div class="">
+                <a href="index.php">Terug</a>
+            </div>
+        </div>
+
+        <div class="col-sm-12 content">
             <h1>Instellingen</h1>
             <div class="settings-eenheden">
                 <h2>Eenheden</h2>
@@ -29,10 +35,10 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
             <hr>
             <div class="settings-notificaties">
                 <h2>Notificaties</h2>
-                <form>
-                    <input type="radio" name="accepteren" value="ontvangen" checked> Ik wil notificaties ontvangen<br>
-                    <input type="radio" name="weigeren" value="niet ontvangen"> Ik wil geen notificaties ontvangen<br> <!-- Als deze optie wordt gekozen kunnen de overige opties worden bevroren -->
-                </form>
+                <div class="radio"><label><input type="radio" name="optradio">Ik wil notificaties ontvangen</label>
+                </div>
+                <div class="radio"><label><input type="radio" name="optradio">Ik wil geen notificaties ontvangen</label>
+                </div>
 
                 <p>Stuur een notificatie om de</p>
                 <select name="notificaties">

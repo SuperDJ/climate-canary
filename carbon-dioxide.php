@@ -6,7 +6,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 <div class="row">
     <div class="col-sm-12 return">
         <div class="">
-            <a href="index.php">Terug</a>
+            <a href="<?php echo ( !empty( $previous ) ? $previous : '/climate-canary/' ); ?>"><i class="material-icons">arrow_back</i> Terug</a>
         </div>
     </div>
 

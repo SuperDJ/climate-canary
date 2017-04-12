@@ -103,20 +103,20 @@ img {
 		color: var(--secondary-color, $secondary-color);
 	}
 
-	&.grey {
-		background: var(--background, $background);
-
-		&:hover {
-			background: var(--background, $background);
-		}
-	}
-
 	&:hover {
 		color: var(--secondary-color, $secondary-color);
 		background: var(--main-color, $main-color);
 
 		.material-icons {
 			color: var(--secondary-color, $secondary-color);
+		}
+	}
+
+	&.grey {
+		background: rgba($black, .26);
+
+		&:hover {
+			background: rgba($black, .26);
 		}
 	}
 }
@@ -256,4 +256,15 @@ a {
 
 .navigate-to .sc-card {
 	margin-bottom: var(--gutter, $gutter);
+}
+
+.return {
+	a {
+		color: rgba($black, .26) !important;
+		font-weight: 500;
+
+		.material-icons {
+			color: var(--main-color, $main-color) !important;
+		}
+	}
 }

@@ -2,6 +2,9 @@
 // Load file that runs everything
 require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/core/engine.php';
 
+$previous = $session->get('previous');
+$session->set('previous', $_SERVER['PHP_SELF']);
+
 $file = str_replace( '.php', '', $_SERVER['PHP_SELF'] );
 $file = str_replace( ' ', '-', $file);
 $file = str_replace('/climate-canary/', '', $file);

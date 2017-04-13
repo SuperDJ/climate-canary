@@ -1,10 +1,36 @@
 <?php
-error_reporting( E_ALL );
-ini_set( 'display_errors', '1' );
 require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/core/engine.php';
 
 $db = new Database();
 $sensor = new Sensor($db);
+
+function createDate( $date ) {
+	$numbers = explode('-', $date);
+
+	$i = 0;
+	foreach( $numbers as $key => $value ) {
+		if( $value < 10 && $value != '0') {
+			$numbers[$i] = '0'.$value;
+		}
+		$i++;
+	}
+
+	return $numbers[2].'-'.$numbers[1].'-'.$numbers[0];
+}
+
+function createTime( $time ) {
+	$numbers = explode(':', $time);
+
+	$i = 0;
+	foreach( $numbers as $key => $value ) {
+		if( $value < 10 && $value != '00' && mb_strlen( $value ) < 2 ) {
+			$numbers[$i] = '0'.$value;
+		}
+		$i++;
+	}
+
+	return $numbers[0].':'.$numbers[1].':'.$numbers[2];
+}
 
 /**************** Get humidity ************/
 $humidity = './humidity.csv';
@@ -16,15 +42,13 @@ if( file_exists( $humidity ) ) {
 		//$line is an array of the csv elements
 		//print_r( $line );
 		if( $line[0] != 'Date/Time' && strpos( $line[1], '%') != true ) {
-			$hArray[$i]['date'] = $line[0];
+			$date = explode( ' ', $line[0] );
+			$hArray[$i]['date'] = createDate( $date[0] ).' '.createTime( $date[1].':00' );
 			$hArray[$i]['humidity'] = $line[1];
 		}
 
 		$i++;
 	}
-
-	print_r($hArray);
-
 	fclose( $file );
 
 	if( $sensor->add( $hArray, 'humidity' ) ) {
@@ -48,7 +72,8 @@ if( file_exists( $co ) ) {
 		//print_r( $line );
 		//echo $line[0];
 		if( $line[0] != 'Date/Time' && !empty( $line[1] ) ) {
-			$cArray[$i]['date'] = $line[0];
+			$date = explode( ' ', $line[0] );
+			$cArray[$i]['date'] = createDate( $date[0] ).' '.createTime( $date[1].':00' );
 			$cArray[$i]['co'] = $line[1];
 		}
 
@@ -78,7 +103,8 @@ if( file_exists( $degrees ) ) {
 		//print_r( $line );
 		//echo $line[0];
 		if( $line[0] != 'Date/Time' && $line[1] != 0 ) {
-			$gArray[$i]['date'] = $line[0];
+			$date = explode( ' ', $line[0] );
+			$gArray[$i]['date'] = createDate( $date[0] ).' '.createTime( $date[1].':00' );
 			$gArray[$i]['degrees'] = $line[1];
 		}
 
@@ -86,7 +112,9 @@ if( file_exists( $degrees ) ) {
 	}
 	fclose( $file );
 
-	if( $sensor->add( $gArray, 'humidity' ) ) {
+	print_r($gArray);
+
+	if( $sensor->add( $gArray, 'degrees' ) ) {
 		echo 'degrees added';
 	} else {
 		echo 'degrees not added';

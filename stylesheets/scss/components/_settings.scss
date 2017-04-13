@@ -49,7 +49,7 @@ $font-size: 14 !default; //px Default 14 or 15
  */
 
 $allowed-colors: (
-	/*'red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green',
+	'red', /*'pink', 'purple', 'deep-purple', 'indigo', 'blue',*/ 'light-blue', /*'cyan',*/ 'teal', /*'green', 'light-green',
 	'lime', 'yellow', 'amber', 'orange', 'deep-orange', 'brown', 'grey', 'blue-grey', 'shades'*/);
 
 @import 'colors';

@@ -39,7 +39,8 @@ $sensor = new Sensor($db);
 <script>
     var $value = document.getElementById('value'),
         $alert = document.getElementById('alert'),
-        $type = '<?php echo $table; ?>';
+        $type = '<?php echo $table; ?>',
+        $degrees = '<?php echo ( $session->exists('settings') ? $session->get('settings')['graden'] : 'Celsius' ); ?>';
 
     setInterval( function() {
 		var http = new XMLHttpRequest(),
@@ -55,19 +56,30 @@ $sensor = new Sensor($db);
 				switch($type) {
                     case 'degrees':
                     	if( $response < 18 ) {
-                            $value.innerHTML = '<span class="sc-light-blue-text">'+$response+'&deg;C</span>';
+                    		if( $degrees == 'Fahrenheit' ) {
+                    			$response = ($response * 1.8) + 32;
+                            }
+
+                            $value.innerHTML = '<span class="sc-light-blue-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
                             $alert.innerText = 'Zet de kachel wat hoger';
                         }
 
 
 						if( $response > 20 ) {
-							$value.innerHTML = '<span class="sc-red-text">'+$response+'&deg;C</span>';
+							if( $degrees == 'Fahrenheit' ) {
+								$response = ($response * 1.8) + 32;
+							}
+
+							$value.innerHTML = '<span class="sc-red-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
 							$alert.innerText = 'Zet de kachel lager of doe een raam open';
 						}
 
-
 						if( $response > 18 && $response < 20 ) {
-							$value.innerHTML = '<span class="sc-teal-text">'+$response+'&deg;C</span>';
+							if( $degrees == 'Fahrenheit' ) {
+								$response = ($response * 1.8) + 32;
+							}
+
+							$value.innerHTML = '<span class="sc-teal-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
 							$alert.innerText = 'De temperatuur is precies goed';
 						}
                     	break;

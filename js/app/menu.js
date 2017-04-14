@@ -37,7 +37,8 @@ $(document).ready(function() {
 		$select.each(function() {
 			$selectID++;
 			var $this = $(this),
-				$options = $this.find('option');
+				$options = $this.find('option'),
+				$disabled = $this.is(':disabled');
 
 			//console.log($options[0].text);
 
@@ -47,7 +48,7 @@ $(document).ready(function() {
 			}
 
 			$this.before(
-				'<div class="sc-select">' +
+				'<div class="sc-select '+($disabled == true ? 'sc-disabled' : '')+'">' +
 				'<span class="sc-select-current sc-trigger" data-sc-trigger="select-'+$selectID+'">' +
 				$options[0].text +
 				'</span>' +

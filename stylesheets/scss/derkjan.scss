@@ -87,6 +87,21 @@ img {
 			}
 		}
 	}
+
+	input {
+		background: rgba($white, .3);
+		color: $white !important;
+
+		@include placeholder() {
+			color: rgba($white, .6);
+		}
+
+		&:hover, &:focus {
+			@include placeholder() {
+				color: $white;
+			}
+		}
+	}
 }
 
 .colored {
@@ -123,22 +138,10 @@ img {
 
 input {
 	width: 100%;
-	background: rgba($white, .3);
-	color: $white !important;
 	padding: rem-calc(5px);
 	border: none;
 	outline: none;
 	@include border-radius(var(--border-size, $border-size));
-
-	@include placeholder() {
-		color: rgba($white, .6);
-	}
-
-	&:hover, &:focus {
-		@include placeholder() {
-			color: $white;
-		}
-	}
 }
 
 .sc-card-actions {
@@ -250,6 +253,16 @@ a {
 	font-weight: 500;
 }
 
+.success {
+	background: $teal;
+	color: $white;
+	font-weight: 500;
+
+	a {
+		color: rgba($black, .26);
+	}
+}
+
 .address-edit main {
 	background: var(--secondary-color, $secondary-color);
 }
@@ -276,4 +289,18 @@ a {
 
 .values #value {
 	font-size: rem-calc(28px);
+}
+
+.settings label {
+	font-weight: 500;
+}
+
+div.sc-select {
+	.material-icons.sc-trigger {
+		color: var(--main-color, $main-color);
+	}
+}
+
+.sc-menu {
+	background: var(--secondary-color, $secondary-color);
 }

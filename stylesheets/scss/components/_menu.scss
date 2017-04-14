@@ -91,4 +91,8 @@ div.sc-select {
 	.sc-active {
 		color: var(--main-color, $main-color);
 	}
+
+	&.sc-disabled {
+		border-bottom: $textfield-border-size dotted $grey;
+	}
 }

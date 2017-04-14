@@ -50,8 +50,8 @@ $navigation-drawer: ('full-height', 'clipped', 'floating', 'persistent', 'tempor
 $progress: ('determinate', 'indeterminate', 'buffer', 'circular'); // It's better to turn off "buffer" since it isn't working properly
 //@import 'components/progress'; // Used to style progress and activity indicators (can be turned off)
 
-$selection: ('checkbox', 'radio', 'switch');
-//@import 'components/selection'; // Used to style selection controls (checkbox, radio button, switch) (can be turned off)
+$selection: (/*'checkbox',*/ 'radio', /*'switch'*/);
+@import 'components/selection'; // Used to style selection controls (checkbox, radio button, switch) (can be turned off)
 
 $slider: ('discrete');
 //@import 'components/sliders'; // Used to style sliders (can be turned off)

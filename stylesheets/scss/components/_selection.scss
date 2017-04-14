@@ -4,7 +4,7 @@
  * http://www.google.com/design/spec/components/selection-controls.html
  **************************************/
 
-$selection-size: rem-calc($font-size-body-1+0px);
+$selection-size: rem-calc($font-size-body-1+0px) + $border-size;
 $selection-border-size: var(--border-size, $border-size);
 
 input[type="checkbox"].sc-checkbox, input[type="radio"].sc-radio {
@@ -92,6 +92,7 @@ input[type="checkbox"].sc-checkbox, input[type="radio"].sc-radio {
 	input[type="radio"].sc-radio {
 		// Off
 		+ label {
+			// Outside
 			&:before {
 				@include border-radius(50%);
 				@include transition(all $transition-small-duration $basic-transition);
@@ -105,11 +106,12 @@ input[type="checkbox"].sc-checkbox, input[type="radio"].sc-radio {
 				}
 			}
 
+			// Inner
 			&:after {
 				display: inline-block;
 				position: relative;
-				top: ( $selection-size / 3 ) * -1;
-				left: ( $selection-size / 3 ) * -2;
+				top: ( ( $selection-size - $border-size ) / 2 ) * -1;
+				left: ( ( $selection-size - $border-size) / 2 ) * -2;
 				@include square(0);
 				content: '';
 				@include border-radius(50%);
@@ -128,16 +130,18 @@ input[type="checkbox"].sc-checkbox, input[type="radio"].sc-radio {
 
 		// On
 		&:checked + label {
+			// Outside
 			&:before {
 				border: var(--border-size, $border-size) solid $selection-active-color;
 			}
 
+			//Inner
 			&:after {
 				background: $selection-active-color;
-				top: rem-calc(1px);
-				left: $selection-size * -1;
-				@include square( ( $selection-size / 3 ) * 2 );
-				margin: 0 ( ( $selection-size / 3 ) * -2 ) 0 0;
+				top: $border-size / 2;
+				left: (($selection-size - $border-size) * -1) + ($border-size / 2);
+				@include square( ( ( $selection-size - $border-size) / 3 ) * 2 );
+				margin: 0 ( ( ( $selection-size - $border-size) / 3 ) * -2 ) 0 0;
 			}
 		}
 

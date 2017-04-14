@@ -31,18 +31,23 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
 
 		<div class="col col-xs-5">
             <div class="col col-xs-12">
-                <a href="/climate-canary/navigate-to.php" class="sc-raised-button grey"><!--<i class="material-icons">arrow_back</i>--> Terug</a>
+                <a href="/climate-canary/navigate-to.php" class="sc-raised-button grey">
+                    <!--<i class="material-icons">arrow_back</i>--> Terug
+                </a>
             </div>
 
             <div class="col col-xs-12">
-                <a href="/climate-canary/navigate.php?from=<?php echo $from.'&fromLat='.$fLat.'&fromLng='.$fLng.'&to='.$to.'&toLat='.$tLat.'&toLng='.$tLng; ?>" class="sc-raised-button"><!--<i class="material-icons">navigation</i>-->Start</a>
+                <a href="/climate-canary/navigate.php?from=<?php echo $from.'&fromLat='.$fLat.'&fromLng='.$fLng.'&to='.$to.'&toLat='.$tLat.'&toLng='.$tLng.'&distance=km&time=hours'; ?>" class="sc-raised-button" id="start">
+                    <!--<i class="material-icons">navigation</i>-->Start
+                </a>
             </div>
 		</div>
 	</section>
 
 	<script>
         var time = document.getElementById('time'),
-		    distance = document.getElementById('distance');
+		    distance = document.getElementById('distance'),
+            start = document.getElementById('start');
 
 		function initMap() {
 			var directionsService = new google.maps.DirectionsService;
@@ -67,6 +72,13 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
 
 					time.innerText = data.duration.text;
 					distance.innerText = data.distance.text;
+
+					// Replace km and hour from link to actual values
+					var link = start.getAttribute('href'),
+                        newLink = link.replace('km', data.distance.text),
+                        newLink = newLink.replace('hours', data.duration.text);
+
+					start.setAttribute('href', newLink);
 
 					directionsDisplay.setDirections(response);
 				} else {

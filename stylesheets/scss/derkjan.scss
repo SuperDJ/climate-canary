@@ -268,3 +268,12 @@ a {
 		}
 	}
 }
+
+.sc-floating-input input {
+	color: rgba($black, .26) !important;
+	font-weight: 400;
+}
+
+.values #value {
+	font-size: rem-calc(28px);
+}

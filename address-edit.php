@@ -43,7 +43,7 @@ if( !empty( $_GET['id'] ) ) {
                      <label for="name">Naam</label>
                  </div>
 
-                 <select name="icons_id" id="category">
+                 <select name="icons_id" id="category" class="sc-select">
 					 <?php
 					 foreach( $address->categories() as $row => $field ) {
 						 echo '<option value='.$field['id'].'>'.$field['category'].'</option>';

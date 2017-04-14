@@ -106,6 +106,9 @@ class Form extends Database {
 							if( $current_value != $value ) {
 								// Check if the value is unique in the database
 								if( $this->_db->exists($item, $rule_value, $item, $value) ) {
+									if( is_numeric( $value ) ) {
+										$value = $this->_db->detail( 'category', explode( '_', $item )[0], 'id', $value );
+									}
 									$this->addError($rules['name'].' '.$value.' bestaat al');
 								}
 							}

@@ -304,3 +304,9 @@ div.sc-select {
 .sc-menu {
 	background: var(--secondary-color, $secondary-color);
 }
+
+.sc-dialog {
+	background: $red;
+	color: $white;
+	font-weight: 500;
+}

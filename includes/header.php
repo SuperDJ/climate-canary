@@ -31,6 +31,27 @@ $file = str_replace('/climate-canary/', '', $file);
 	<meta name="theme-color" content="#FFCC33">
 	<meta name="msapplication-navbutton-color" content="#FFCC33">
 	<meta name="apple-mobile-web-app-status-bar-style" content="#FFCC33">
+
+    <!-- Make sure JS is enabled -->
+    <noscript>
+        <div class="sc-dialog sc-expanded">
+            <div class="sc-dialog-container">
+                <div class="sc-dialog-title">JavaScript aanzetten</div>
+                U heeft JavaScript uit, zet JavaScript aan om de app te gebruiken.
+            </div>
+        </div>
+    </noscript>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">
+    <!--[if IE ]>
+    <div class="sc-dialog sc-expanded">
+        <div class="sc-dialog-container">
+            <div class="sc-dialog-title">Verouderde browser</div>
+            U maakt gebruik van een verouderde en <u>onveilige</u> browser.
+            Stap over op Chrome of Firefox.
+        </div>
+    </div>
+    <![endif]-->
 </head>
 
 <body class="<?php echo $file; ?>">

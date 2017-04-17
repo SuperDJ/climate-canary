@@ -14,6 +14,10 @@ $time = $db->sanitize($_GET['time']);
 
 if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !empty( $tLat ) && !empty( $tLng ) && !empty( $distance ) && !empty( $time ) ) {
 	?>
+    <div id="pause">
+        Neem binnenkort een pauze
+    </div>
+
 	<section class="row">
 		<div class="map-confirmation col col-xs-12" id="map"></div> <!-- Display Google maps -->
 	</section>
@@ -21,11 +25,11 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
     <div class="sidebar">
         <div id="speed">0<?php echo ( $session->exists('settings') ? $session->get('settings')['snelheid'] : 'KM/H' ); ?></div>
 
-        <div id="degrees">20</div>
+        <a href="/climate-canary/values.php?type=temperature" id="degrees">20</a>
 
-        <div id="co">2000ppm</div>
+        <a href="/climate-canary/values.php?type=carbon-dioxide" id="co">2000ppm</span></a>
 
-        <div id="humidity">23%</div>
+        <a href="/climate-canary/values.php?type=humidity" id="humidity">23%</a>
 
         <div id="time"></div>
 
@@ -34,12 +38,32 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
 
 	<script>
 		var time = document.getElementById('time'),
+            arrival = document.getElementById('arrival'),
 			distance = document.getElementById('distance'),
             degrees = document.getElementById('degrees'),
+            pause = document.getElementById('pause'),
 			$degrees = '<?php echo ( $session->exists('settings') ? $session->get('settings')['graden'] : 'Celsius' ); ?>',
             co = document.getElementById('co'),
             humidity = document.getElementById('humidity'),
-			start = document.getElementById('start');
+			start = document.getElementById('start'),
+            date = new Date(),
+            duration = '<?php echo $_GET['time']; ?>',
+            hours = duration.split(' ')[0],
+            minutes = duration.split(' ')[2],
+            endDate = new Date(date);
+
+        // Set current time
+        time.innerText = ( date.getHours() < 10 ? '0'+date.getHours() : date.getHours() )+':'+( date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes() );
+
+        // Get arrival time
+		endDate.setHours(date.getHours() + Number(hours));
+		endDate.setMinutes(date.getMinutes() + Number(minutes));
+        arrival.innerText = ( endDate.getHours() < 10 ? '0'+endDate.getHours() : endDate.getHours() )+':'+( endDate.getMinutes() < 10 ? '0'+endDate.getMinutes() : endDate.getMinutes() ) + ' aankomst';
+
+        // Check if route needs breaks
+        if( hours > 2 ) {
+            pause.style.display = 'block';
+        }
 
 		function initMap() {
 			var directionsService = new google.maps.DirectionsService;

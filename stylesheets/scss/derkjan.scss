@@ -310,3 +310,84 @@ div.sc-select {
 	color: $white;
 	font-weight: 500;
 }
+
+.navigate {
+	.sc-appbar {
+		display: none;
+	}
+
+	.map-confirmation {
+		top: 0;
+		bottom: 0;
+		width: 100%;
+		height: 100%;
+
+		@media #{$portrait} {
+			bottom: rem-calc(80px);
+		}
+
+		@media #{$landscape} {
+			right: rem-calc(100px) + (2 * rem-calc(10px));
+		}
+	}
+
+	#pause {
+		background: var(--main-color, $main-color);
+		color: $white;
+		position: fixed;
+		padding: rem-calc(10px);
+		left: 0;
+		top: 0;
+		z-index: 10;
+		display: none;
+	}
+
+	.sidebar {
+		position: fixed;
+		z-index: 10;
+		@include flex-container(row, wrap, flex-start, flex-start, flex-start);
+
+		> div, > a {
+			display: block;
+			background: $white;
+			min-width: rem-calc(100px);
+			padding: rem-calc(10px);
+			text-align: center;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-bottom: rem-calc(1px) solid rgba($black, .20);
+		}
+	}
+
+	@media #{$portrait} {
+		.sidebar {
+			width: 100%;
+			left: 0;
+			bottom: 0;
+			height: rem-calc(80px);
+
+			> div, > a {
+				max-width: 33.33%;
+				height: rem-calc(40px);
+				flex-basis: 33.33%;
+			}
+		}
+	}
+
+	@media #{$landscape} {
+		.sidebar {
+			right: 0;
+			height: 100%;
+			top: 0;
+			bottom: 0;
+			width: rem-calc(100px) + (2 * rem-calc(10px));
+
+			> div, > a {
+				max-width: 100%;
+				height: 16.66%;
+				flex-basis: 100%;
+			}
+		}
+	}
+}

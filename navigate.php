@@ -48,17 +48,30 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
 			start = document.getElementById('start'),
             date = new Date(),
             duration = '<?php echo $_GET['time']; ?>',
-            hours = duration.split(' ')[0],
-            minutes = duration.split(' ')[2],
-            endDate = new Date(date);
+            hours = 0,
+            minutes = 0,
+            endDate = new Date(date);      
 
         // Set current time
-        time.innerText = ( date.getHours() < 10 ? '0'+date.getHours() : date.getHours() )+':'+( date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes() );
+        time.innerText =
+            ( date.getHours() < 10 ? '0' + date.getHours() : date.getHours() ) + ':' +
+            ( date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes() );
+
+        // Check if time has hours
+        if( duration.indexOf('hours') > 0 ) {
+			hours = duration.split(' ')[0];
+            minutes = duration.split(' ')[2];
+        } else {
+			minutes = duration.split(' ')[0];
+        }
 
         // Get arrival time
-		endDate.setHours(date.getHours() + Number(hours));
-		endDate.setMinutes(date.getMinutes() + Number(minutes));
-        arrival.innerText = ( endDate.getHours() < 10 ? '0'+endDate.getHours() : endDate.getHours() )+':'+( endDate.getMinutes() < 10 ? '0'+endDate.getMinutes() : endDate.getMinutes() ) + ' aankomst';
+		endDate.setHours( date.getHours() + Number( hours ) );
+		endDate.setMinutes( date.getMinutes() + Number( minutes ) );
+		console.log( endDate );
+        arrival.innerText =
+            ( endDate.getHours() < 10 ? '0' + endDate.getHours() : endDate.getHours() ) + ':' +
+            ( endDate.getMinutes() < 10 ? '0' + endDate.getMinutes() : endDate.getMinutes() ) + ' aankomst';
 
         // Check if route needs breaks
         if( hours > 2 ) {
@@ -117,7 +130,7 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
 
 			http.onreadystatechange = function() {//Call a function when the state changes.
 				if( http.readyState == 4 && http.status == 200 ) {
-					var $response = Number(http.responseText);
+					var $response = Number(http.responseText).toFixed(1);;
                     if( $response < 18 ) {
                         if( $degrees == 'Fahrenheit' ) {
                             $response = ($response * 1.8) + 32;
@@ -144,7 +157,7 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
 				}
 			}
 			http.send();
-		}, 1000);
+		}, 15000);
 		/** End Degrees **/
 
 		/** Humidity **/
@@ -173,7 +186,7 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
 				}
 			}
 			http.send();
-		}, 1001);
+		}, 14000);
 		/** End Humidity **/
 
 		/** Co **/
@@ -198,7 +211,7 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
 				}
 			}
 			http.send();
-		}, 1004);
+		}, 16000);
 		/** End Co **/
 	</script>
 	<script async defer

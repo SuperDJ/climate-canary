@@ -64,14 +64,12 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
                     <h2>Eenheden</h2>
                     <p>Snelheid:</p>
                     <select name="snelheid" class="sc-select">
-                        <?php echo ( !empty( $settings ) ? '<option value="'.$settings['snelheid'].'">'.$settings['snelheid'].'</option>' : '<option></option>'); ?>
                         <option value="KM/H">KM/H</option>
                         <option value="MPH">MPH</option>
                     </select>
 
                     <p>Temperatuur:</p>
                     <select name="graden" class="sc-select">
-						<?php echo ( !empty( $settings ) ? '<option value="'.$settings['graden'].'">'.$settings['graden'].'</option>' : '<option></option>'); ?>
                         <option value="Celsius">Celsius</option>
                         <option value="Fahrenheit">Fahrenheit</option>
                     </select>
@@ -86,6 +84,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 
                     foreach( $data as $row => $field ) {
                         if( $field['icons_id'] == 1 ) {
+
                             echo '  <p>'.$field['address'].'</p>
                                     <a href="/climate-canary/address-edit.php?id='.base64_encode( $field['id'] ).'">Wijzig</a>';
                         }
@@ -99,8 +98,8 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
                     <h2>Notificaties</h2>
 
                     <div class="col col-xs-12">
-                        <input type="radio" id="yes" name="notification-receive" value="yes" class="sc-radio" <?php echo ( !empty( $settings ) && $settings['notification-receive'] == 'yes' ? 'checked' : ''); ?>>
-                        <label for="yes">Ik wil notificaties ontvangen</label>
+                            <input type="radio" id="yes" name="notification-receive" value="yes" class="sc-radio" <?php echo ( !empty( $settings ) && $settings['notification-receive'] == 'yes' ? 'checked' : ''); ?>>
+                            <label for="yes">Ik wil notificaties ontvangen</label>
                     </div>
 
                     <div class="col col-xs-12">
@@ -110,7 +109,6 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 
                     <p>Stuur een notificatie om de</p>
                     <select name="notification-pause" class="sc-select" <?php echo ( !empty( $settings ) && $settings['notification-receive'] == 'no' ? 'disabled' : ''); ?>>
-						<?php echo ( !empty( $settings ) ? '<option value="'.$settings['notification-pause'].'">'.$settings['notification-pause'].'</option>' : '<option></option>'); ?>
                         <option value="5 minuten">5 minuten</option>
                         <option value="15 minuten">15 minuten</option>
                         <option value="30 minuten">30 minuten</option>

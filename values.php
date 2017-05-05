@@ -30,9 +30,114 @@ $sensor = new Sensor($db);
 
     <div class="col-sm-12 content">
         <h1><?php echo $title; ?></h1>
-        <p id="value"><?php echo $sensor->get($table); ?></p>
+
+		<?php
+/*		$degrees = ( $session->exists('settings') ? $session->get('settings')['graden'] : 'Celsius' );
+		$response = $sensor->get($table);
+		$value = '';
+		$alert = '';
+
+		switch( $table ) {
+			case 'degrees':
+				if( $response < 17.5 ) {
+					if( $degrees == 'Fahrenheit' ) {
+						$response = ( $response * 1.8 ) + 32;
+					}
+					$response = number_format( $response, 1, '.', '');
+
+					$value .= '<span class="sc-red-text">'.$response.($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ).'</span>';
+					$alert .= 'Zet de kachel wat hoger';
+				}
+
+				if( $response > 17.5 && $response < 18.5 ) {
+					if( $degrees == 'Fahrenheit' ) {
+						$response = ( $response * 1.8 ) + 32;
+					}
+					$response = number_format( $response, 1, '.', '');
+
+					$value .= '<span class="sc-orange-text">'.$response.($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ).'</span>';
+					$alert .= 'De temperatuur dreigt te laag te worden.';
+				}
+
+				if( $response > 18.5 && $response < 20.5 ) {
+					if( $degrees == 'Fahrenheit' ) {
+						$response = ( $response * 1.8 ) + 32;
+					}
+					$response = number_format( $response, 1, '.', '');
+
+					$value .= '<span class="sc-teal-text">'.$response.($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ).'</span>';
+					$alert .= 'De temperatuur is precies goed';
+				}
+
+				if( $response > 20.5 && $response < 21.5 ) {
+					if( $degrees == 'Fahrenheit' ) {
+						$response = ( $response * 1.8 ) + 32;
+					}
+					$response = number_format( $response, 1, '.', '');
+
+					$value .= '<span class="sc-orange-text">'.$response.($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ).'</span>';
+					$alert .= 'De temperatuur dreigt te hoog te worden.';
+				}
+
+				if( $response > 21.5 ) {
+					if( $degrees == 'Fahrenheit' ) {
+						$response = ( $response * 1.8 ) + 32;
+					}
+					$response = number_format( $response, 1, '.', '');
+
+					$value .= '<span class="sc-red-text">'.$response.($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ).'</span>';
+					$alert .= 'Zet de kachel lager of doe een raam open';
+				}
+				break;
+			case 'co':
+				if( $response > 1250 ) {
+					$value .= '<span class="sc-red-text">'.$response.'ppm</span>';
+					$alert .= 'Doe een raam open of zet de luchtoevoer op van buitenaf';
+				}
+
+				if( $response > 1150 && $response < 1250 ) {
+					$value .= '<span class="sc-orange-text">'.$response.'ppm</span>';
+					$alert .= 'De Co2 waarde dreigt te hoog te worden.';
+				}
+
+				if( $response < 1150 ) {
+					$value .= '<span class="sc-teal-text">'.$response.'ppm</span>';
+					$alert .= 'De Co2 waarde is goed';
+				}
+				break;
+			case 'humidity':
+				if( $response > 60 ) {
+					$value .= '<span class="sc-red-text">'.$response.'%</span>';
+					$alert .= 'Zet de kachel hoger';
+				}
+
+				if( $response > 57 && $response < 60 ) {
+					$value .= '<span class="sc-orange-text">'.$response.'%</span>';
+					$alert .= 'De luchtvochtigheid dreigt te hoog te worden.';
+				}
+
+				if( $response < 40 ) {
+					$value .= '<span class="sc-red-text">'.$response.'%</span>';
+					$alert .= 'Zet een raam open of gebruik een luchtbevochtiger';
+				}
+
+				if( $response > 40 && $response < 43 ) {
+					$value .= '<span class="sc-orange-text">'.$response.'%</span>';
+					$alert .= 'De luchtvochtigheid dreigt te laag te worden.';
+				}
+
+				if( $response > 43 && $response < 57 ) {
+					$value .= '<span class="sc-teal-text">'.$response.'%</span>';
+					$alert .= 'De luchtvochtigheid is precies goed';
+				}
+				break;
+		}
+		*/?>
+
+        <p id="value"><?php echo $sensor->get($table).' '/*.$value*/; ?></p>
         <p>in de auto</p>
-        <p id="alert"></p>
+        <p id="alert"><?php /*echo $alert;*/ ?></p>
+
     </div>
 </section>
 
@@ -55,41 +160,68 @@ $sensor = new Sensor($db);
 				var $response = Number(http.responseText);
 				switch($type) {
                     case 'degrees':
-                    	if( $response < 18 ) {
+                    	if( $response < 17.5 ) {
                     		if( $degrees == 'Fahrenheit' ) {
                     			$response = ($response * 1.8) + 32;
                             }
+							$response = $response.toFixed(1);
 
-                            $value.innerHTML = '<span class="sc-light-blue-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
+                            $value.innerHTML = '<span class="sc-red-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
                             $alert.innerText = 'Zet de kachel wat hoger';
                         }
 
-
-						if( $response > 20 ) {
+						if( $response > 17.5 && $response <18.5 ) {
 							if( $degrees == 'Fahrenheit' ) {
 								$response = ($response * 1.8) + 32;
 							}
+							$response = $response.toFixed(1);
 
-							$value.innerHTML = '<span class="sc-red-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
-							$alert.innerText = 'Zet de kachel lager of doe een raam open';
+							$value.innerHTML = '<span class="sc-orange-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
+							$alert.innerText = 'De temperatuur dreigt te laag te worden.';
 						}
 
-						if( $response > 18 && $response < 20 ) {
+						if( $response > 18.5 && $response < 20.5 ) {
 							if( $degrees == 'Fahrenheit' ) {
 								$response = ($response * 1.8) + 32;
 							}
+							$response = $response.toFixed(1);
 
 							$value.innerHTML = '<span class="sc-teal-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
 							$alert.innerText = 'De temperatuur is precies goed';
 						}
+
+						if( $response > 20.5 && $response <21.5 ) {
+							if( $degrees == 'Fahrenheit' ) {
+								$response = ($response * 1.8) + 32;
+							}
+							$response = $response.toFixed(1);
+
+							$value.innerHTML = '<span class="sc-orange-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
+							$alert.innerText = 'De temperatuur dreigt te hoog te worden.';
+						}
+
+						if( $response > 21.5) {
+							if( $degrees == 'Fahrenheit' ) {
+								$response = ($response * 1.8) + 32;
+							}
+							$response = $response.toFixed(1);
+
+							$value.innerHTML = '<span class="sc-red-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
+							$alert.innerText = 'Zet de kachel lager of doe een raam open';
+						}
                     	break;
                     case 'co':
-                    	if( $response > 1200 ) {
+                    	if( $response > 1250 ) {
                     		$value.innerHTML = '<span class="sc-red-text">'+$response+'ppm</span>';
                     		$alert.innerText = 'Doe een raam open of zet de luchtoevoer op van buitenaf';
                         }
 
-                        if( $response < 1200 ) {
+						if( $response > 1150 && $response < 1250 ) {
+							$value.innerHTML = '<span class="sc-orange-text">'+$response+'ppm</span>';
+							$alert.innerText = 'De Co2 waarde dreigt te hoog te worden.';
+						}
+
+                        if( $response < 1150 ) {
                     		$value.innerHTML = '<span class="sc-teal-text">'+$response+'ppm</span>';
                     		$alert.innerText = 'De Co2 waarde is goed';
                         }
@@ -100,12 +232,22 @@ $sensor = new Sensor($db);
 							$alert.innerText = 'Zet de kachel hoger';
                         }
 
+						if( $response > 57 && $response < 60 ) {
+							$value.innerHTML = '<span class="sc-orange-text">'+$response+'%</span>';
+							$alert.innerText = 'De luchtvochtigheid dreigt te hoog te worden.';
+						}
+
 						if( $response < 40 ) {
-							$value.innerHTML = '<span class="sc-light-blue-text">'+$response+'%</span>';
+							$value.innerHTML = '<span class="sc-red-text">'+$response+'%</span>';
 							$alert.innerText = 'Zet een raam open of gebruik een luchtbevochtiger';
 						}
 
-						if( $response > 40 && $response < 60 ) {
+						if( $response > 40 && $response < 43 ) {
+							$value.innerHTML = '<span class="sc-orange-text">'+$response+'%</span>';
+							$alert.innerText = 'De luchtvochtigheid dreigt te laag te worden.';
+						}
+
+						if( $response > 43 && $response < 57 ) {
 							$value.innerHTML = '<span class="sc-teal-text">'+$response+'%</span>';
 							$alert.innerText = 'De luchtvochtigheid is precies goed';
 						}
@@ -114,7 +256,7 @@ $sensor = new Sensor($db);
 			}
 		}
 		http.send();
-    }, 1000);
+    }, 15000);
 </script>
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/footer.php';

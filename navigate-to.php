@@ -125,7 +125,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
                                     </div>
                                     
                                     <div class="col col-xs-6">
-                                        <a href="address-delete.php?id='.base64_encode($field['id']).'"><i class="material-icons">delete</i></a>
+                                        <a href="address-delete.php?id='.base64_encode($field['id']).'" onClick="return confirm(\'Weet je zeker dat je dit adres wilt verwijderen?\')"><i class="material-icons">delete</i></a>
                                     </div>
                                 </div>
                             </div>';

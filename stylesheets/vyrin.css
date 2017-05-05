@@ -1,0 +1,130 @@
+#squaretop {
+    background-color: white;
+    width: 150px;
+    height:20px;
+    position:relative;
+    min-height:1px;
+    padding-left:15px;
+    padding-right:15px;
+    margin-right: 15px;
+    float:right;
+}
+
+.timetop {
+    float:right;
+}
+
+.squarebottom {
+    background-color: white;
+    height: 50px;
+
+}
+/*#position{
+    position: relative;
+    top: 0px;
+}
+*/
+
+/*Samsung S3*/
+@media only screen
+and (device-width: 320px)
+and (device-height: 640px)
+and (orientation: portrait){
+    #position {
+        position: relative;
+        top: 320px;
+    }
+}
+
+@media only screen
+and (device-width: 320px)
+and (device-height: 640px)
+and (orientation: landscape){
+    #position {
+        position: relative;
+        top: 100px;
+    }
+}
+
+/*Samsung Tab 4*/
+@media only screen
+and (device-width: 800px)
+and (device-height: 1280px)
+and (orientation: portrait){
+    #position {
+        position: relative;
+        top: 950px;
+    }
+}
+
+@media only screen and (min-aspect-ratio) {
+    body {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+    }
+    #position {
+        position: relative;
+        top: 600px;
+    }
+}
+
+/*Nexus 5*/
+@media only screen
+and (device-width: 360px)
+and (device-height: 640px)
+and (orientation: portrait){
+    #position {
+        position: relative;
+        top: 350px;
+    }
+}
+
+@media only screen
+and (device-width: 360px)
+and (device-height: 640px)
+and (orientation: landscape){
+    #position {
+        position: relative;
+        top: 50px;
+    }
+}
+
+/*iPhone 6/7*/
+@media only screen
+and (device-width: 375px)
+and (device-height: 667px)
+and (orientation: portrait){
+    #position {
+        position: relative;
+        top: 350px;
+    }
+}
+@media only screen
+and (device-width: 375px)
+and (device-height: 667px)
+and (orientation: landscape){
+    #position {
+        position: relative;
+        top: 20px;
+    }
+}
+
+#pause ~.test {
+    top: 40px;
+    z-index: 99;
+}
+
+.test {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+/*
+background-color: white;
+width:120px;
+height:50px;
+text-align: center;
+vertical-align: middle;
+line-height: 50px;*/

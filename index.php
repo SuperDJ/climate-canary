@@ -27,19 +27,15 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 <section class="row">
     <div class="col col-xs-6 col-sm-6">
         <a href="/climate-canary/values.php?type=temperature" class="sc-card sc-center home">
-            <div class="sc-card-supporting">
-                <i class="material-icons">wb_sunny</i>
-                <span>Temperatuur</span>
-            </div>
+            <span id="degrees"></span><br>
+            <span class="text">Temperatuur</span>
         </a>
     </div>
 
     <div class="col col-xs-6 col-sm-6">
         <a href="/climate-canary/values.php?type=carbon-dioxide" class="sc-card sc-center home">
-            <div class="sc-card-supporting">
-                <i class="material-icons">grain</i>
-                <span>CO<sub>2</sub> gehalte</span>
-            </div>
+            <span id="co"></span> <br>
+            <span class="text">CO<sub>2</sub> gehalte</span>
         </a>
     </div>
 </section>
@@ -47,10 +43,8 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 <section class="row">
     <div class="col col-xs-6 col-sm-6">
         <a href="/climate-canary/values.php?type=humidity" class="sc-card sc-center home">
-            <div class="sc-card-supporting">
-                <i class="material-icons">cloud</i>
-                <span>Luchtvochigheid</span>
-            </div>
+            <span id="humidity"></span><br>
+            <span class="text">Luchtvochigheid</span>
         </a>
     </div>
 
@@ -63,5 +57,107 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
         </a>
     </div>
 </section>
+<script>
+    var degrees = document.getElementById('degrees'),
+        $degrees = '<?php echo ( $session->exists('settings') ? $session->get('settings')['graden'] : 'Celsius' ); ?>',
+        co = document.getElementById('co'),
+        humidity = document.getElementById('humidity');
+
+    /** Degrees **/
+    setInterval( function() {
+        var http = new XMLHttpRequest(),
+            url = '/climate-canary/core/ajax.php?type=degrees';
+        http.open( 'GET', url, true );
+
+        //Send the proper header information along with the request
+        http.setRequestHeader('Content-type', 'text/plain');
+
+        http.onreadystatechange = function() {//Call a function when the state changes.
+            if( http.readyState == 4 && http.status == 200 ) {
+                var $response = Number(http.responseText).toFixed(1);;
+                if( $response < 18 ) {
+                    if( $degrees == 'Fahrenheit' ) {
+                        $response = ($response * 1.8) + 32;
+                    }
+
+                    degrees.innerHTML = '<span class="sc-light-blue-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
+                }
+
+                if( $response > 20 ) {
+                    if( $degrees == 'Fahrenheit' ) {
+                        $response = ($response * 1.8) + 32;
+                    }
+
+                    degrees.innerHTML = '<span class="sc-red-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
+                }
+
+                if( $response > 18 && $response < 20 ) {
+                    if( $degrees == 'Fahrenheit' ) {
+                        $response = ($response * 1.8) + 32;
+                    }
+
+                    degrees.innerHTML = '<span class="sc-teal-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
+                }
+            }
+        }
+        http.send();
+    }, 15000);
+    /** End Degrees **/
+
+    /** Humidity **/
+    setInterval( function() {
+        var http = new XMLHttpRequest(),
+            url = '/climate-canary/core/ajax.php?type=humidity'
+        http.open( 'GET', url, true );
+
+        //Send the proper header information along with the request
+        http.setRequestHeader('Content-type', 'text/plain');
+
+        http.onreadystatechange = function() {//Call a function when the state changes.
+            if( http.readyState == 4 && http.status == 200 ) {
+                var $response = Number(http.responseText);
+                if( $response > 60 ) {
+                    humidity.innerHTML = '<span class="sc-red-text">'+$response+'%</span>';
+                }
+
+                if( $response < 40 ) {
+                    humidity.innerHTML = '<span class="sc-light-blue-text">'+$response+'%</span>';
+                }
+
+                if( $response > 40 && $response < 60 ) {
+                    humidity.innerHTML = '<span class="sc-teal-text">'+$response+'%</span>';
+                }
+            }
+        }
+        http.send();
+    }, 14000);
+    /** End Humidity **/
+
+    /** Co **/
+    setInterval( function() {
+        var http = new XMLHttpRequest(),
+            url = '/climate-canary/core/ajax.php?type=co';
+        http.open( 'GET', url, true );
+
+        //Send the proper header information along with the request
+        http.setRequestHeader('Content-type', 'text/plain');
+
+        http.onreadystatechange = function() {//Call a function when the state changes.
+            if( http.readyState == 4 && http.status == 200 ) {
+                var $response = Number(http.responseText);
+                if( $response > 1200 ) {
+                    co.innerHTML = '<span class="sc-red-text">'+$response+'ppm</span>';
+                }
+
+                if( $response < 1200 ) {
+                    co.innerHTML = '<span class="sc-teal-text">'+$response+'ppm</span>';
+                }
+            }
+        }
+        http.send();
+    }, 16000);
+    /** End Co **/
+</script>
+
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/footer.php';

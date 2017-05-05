@@ -84,6 +84,7 @@ class Address {
 			FROM `address` `a`
 			JOIN `icons` `i`
 				ON `i`.`id` = `a`.`icons_id`
+			
 		";
 
 		if( !is_null( $id ) ) {
@@ -91,6 +92,7 @@ class Address {
 			$stmt = $this->_db->mysqli->prepare($query);
 			$stmt->bindParam(':id', $id, PDO::PARAM_INT);
 		} else {
+			$query .= "ORDER BY `id` DESC LIMIT 3";
 			$stmt = $this->_db->mysqli->prepare($query);
 		}
 		$stmt->execute();

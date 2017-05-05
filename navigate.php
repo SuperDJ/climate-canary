@@ -14,7 +14,6 @@ $time = $db->sanitize($_GET['time']);
 
 if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !empty( $tLat ) && !empty( $tLng ) && !empty( $distance ) && !empty( $time ) ) {
 	?>
-
     <div id="pause">
         Neem om <span id="pauseTime"></span> een pauze
     </div>

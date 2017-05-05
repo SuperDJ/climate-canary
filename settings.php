@@ -116,6 +116,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
                     </select>
                     <br />
                     <p>Geen meldingen ontvangen tot</p>
+
                     <div class="sc-floating-input">
                         <input type="text" pattern="[0-2][0-3]:[0-5][0-9]:[0-5][0-9]" name="time" id="time" step="1" value="<?php echo ( !empty( $settings ) ? $settings['time'] : ''); ?>" <?php echo ( !empty( $settings ) && $settings['notification-receive'] == 'no' ? 'disabled' : ''); ?>>
                         <label for="time">Tijd <em><?php echo '(uu:mm:ss)'; ?></em></label>

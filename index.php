@@ -1,6 +1,8 @@
 <?php
 $title = 'Home';
 require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
+
+$sensor = new Sensor( $db );
 ?>
 
 <section class="row">
@@ -26,15 +28,81 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 
 <section class="row">
     <div class="col col-xs-6 col-sm-6">
-        <a href="/climate-canary/values.php?type=temperature" class="sc-card sc-center home">
-            <span id="degrees"></span><br>
+        <a href="/climate-canary/values.php?type=temperature" class="sc-card sc-center home data">
+           <?php
+/*            $response = $sensor->get('degrees');
+			$degrees = ( $session->exists('settings') ? $session->get('settings')['graden'] : 'Celsius' );
+            $html = '';
+
+			if( $response < 17.5 ) {
+				if( $degrees == 'Fahrenheit' ) {
+					$response = ( $response * 1.8 ) + 32;
+				}
+				$response = number_format( $response, 1, '.', '');
+
+				$html .= '<span class="sc-red-text">'.$response.($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ).'</span>';
+			}
+
+			if( $response > 17.5 && $response < 18.5 ) {
+				if( $degrees == 'Fahrenheit' ) {
+					$response = ( $response * 1.8 ) + 32;
+				}
+				$response = number_format( $response, 1, '.', '');
+
+				$html .= '<span class="sc-orange-text">'.$response.($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ).'</span>';
+			}
+
+			if( $response > 18.5 && $response < 20.5 ) {
+				if( $degrees == 'Fahrenheit' ) {
+					$response = ( $response * 1.8 ) + 32;
+				}
+				$response = number_format( $response, 1, '.', '');
+
+				$html .= '<span class="sc-teal-text">'.$response.($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ).'</span>';
+			}
+
+			if( $response > 20.5 && $response < 21.5 ) {
+				if( $degrees == 'Fahrenheit' ) {
+					$response = ( $response * 1.8 ) + 32;
+				}
+				$response = number_format( $response, 1, '.', '');
+
+				$html .= '<span class="sc-orange-text">'.$response.($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ).'</span>';
+			}
+
+			if( $response > 21.5 ) {
+				if( $degrees == 'Fahrenheit' ) {
+					$response = ( $response * 1.8 ) + 32;
+				}
+				$response = number_format( $response, 1, '.', '');
+
+				$html .= '<span class="sc-red-text">'.$response.($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ).'</span>';
+			}
+            */?>
+            <span class="data" id="degrees">Laden...<?php /*echo $html; */?></span><br>
             <span class="text">Temperatuur</span>
         </a>
     </div>
 
     <div class="col col-xs-6 col-sm-6">
-        <a href="/climate-canary/values.php?type=carbon-dioxide" class="sc-card sc-center home">
-            <span id="co"></span> <br>
+        <a href="/climate-canary/values.php?type=carbon-dioxide" class="sc-card sc-center home data">
+            <?php
+/*			$response = $sensor->get('co');
+			$html = '';
+
+			if( $response > 1250 ) {
+				$html .= '<span class="sc-red-text">'.$response.'ppm</span>';
+			}
+
+			if( $response > 1150 && $response < 1250 ) {
+				$html .= '<span class="sc-orange-text">'.$response.'ppm</span>';
+			}
+
+			if( $response < 1150 ) {
+				$html .= '<span class="sc-teal-text">'.$response.'ppm</span>';
+			}
+            */?>
+            <span class="data" id="co">Laden...<?php /*echo $html; */?></span><br>
             <span class="text">CO<sub>2</sub> gehalte</span>
         </a>
     </div>
@@ -42,8 +110,32 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 
 <section class="row">
     <div class="col col-xs-6 col-sm-6">
-        <a href="/climate-canary/values.php?type=humidity" class="sc-card sc-center home">
-            <span id="humidity"></span><br>
+        <a href="/climate-canary/values.php?type=humidity" class="sc-card sc-center home data">
+            <?php
+/*            $response = $sensor->get('humidity');
+            $html = '';
+
+			if( $response > 60 ) {
+				$html .= '<span class="sc-red-text">'.$response.'%</span>';
+			}
+
+			if( $response > 57 && $response < 60 ) {
+				$html .= '<span class="sc-orange-text">'.$response.'%</span>';
+			}
+
+			if( $response < 40 ) {
+				$html .= '<span class="sc-red-text">'.$response.'%</span>';
+			}
+
+			if( $response > 40 && $response < 43 ) {
+				$html .= '<span class="sc-orange-text">'.$response.'%</span>';
+			}
+
+			if( $response > 43 && $response < 57 ) {
+				$html .= '<span class="sc-teal-text">'.$response.'%</span>';
+			}
+            */?>
+            <span class="data" id="humidity">Laden...<?php /*echo $html; */?></span><br>
             <span class="text">Luchtvochigheid</span>
         </a>
     </div>
@@ -74,30 +166,52 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 
         http.onreadystatechange = function() {//Call a function when the state changes.
             if( http.readyState == 4 && http.status == 200 ) {
-                var $response = Number(http.responseText).toFixed(1);;
-                if( $response < 18 ) {
-                    if( $degrees == 'Fahrenheit' ) {
-                        $response = ($response * 1.8) + 32;
-                    }
+            	var $response = Number(http.responseText);
 
-                    degrees.innerHTML = '<span class="sc-light-blue-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
-                }
+				if( $response < 17.5 ) {
+					if( $degrees == 'Fahrenheit' ) {
+						$response = ($response * 1.8) + 32;
+					}
+					$response = $response.toFixed(1);
 
-                if( $response > 20 ) {
-                    if( $degrees == 'Fahrenheit' ) {
-                        $response = ($response * 1.8) + 32;
-                    }
+					degrees.innerHTML = '<span class="sc-red-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
+				}
 
-                    degrees.innerHTML = '<span class="sc-red-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
-                }
+				if( $response > 17.5 && $response <18.5 ) {
+					if( $degrees == 'Fahrenheit' ) {
+						$response = ($response * 1.8) + 32;
+					}
+					$response = $response.toFixed(1);
 
-                if( $response > 18 && $response < 20 ) {
-                    if( $degrees == 'Fahrenheit' ) {
-                        $response = ($response * 1.8) + 32;
-                    }
+					degrees.innerHTML = '<span class="sc-orange-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
+				}
 
-                    degrees.innerHTML = '<span class="sc-teal-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
-                }
+				if( $response > 18.5 && $response < 20.5 ) {
+					if( $degrees == 'Fahrenheit' ) {
+						$response = ($response * 1.8) + 32;
+					}
+					$response = $response.toFixed(1);
+
+					degrees.innerHTML = '<span class="sc-teal-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
+				}
+
+				if( $response > 20.5 && $response < 21.5 ) {
+					if( $degrees == 'Fahrenheit' ) {
+						$response = ($response * 1.8) + 32;
+					}
+					$response = $response.toFixed(1);
+
+					degrees.innerHTML = '<span class="sc-orange-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
+				}
+
+				if( $response > 21.5) {
+					if( $degrees == 'Fahrenheit' ) {
+						$response = ($response * 1.8) + 32;
+					}
+					$response = $response.toFixed(1);
+
+					degrees.innerHTML = '<span class="sc-red-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
+				}
             }
         }
         http.send();
@@ -116,17 +230,25 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
         http.onreadystatechange = function() {//Call a function when the state changes.
             if( http.readyState == 4 && http.status == 200 ) {
                 var $response = Number(http.responseText);
-                if( $response > 60 ) {
-                    humidity.innerHTML = '<span class="sc-red-text">'+$response+'%</span>';
-                }
+				if( $response > 60 ) {
+					humidity.innerHTML = '<span class="sc-red-text">'+$response+'%</span>';
+				}
 
-                if( $response < 40 ) {
-                    humidity.innerHTML = '<span class="sc-light-blue-text">'+$response+'%</span>';
-                }
+				if( $response > 57 && $response < 60 ) {
+					humidity.innerHTML = '<span class="sc-orange-text">'+$response+'%</span>';
+				}
 
-                if( $response > 40 && $response < 60 ) {
-                    humidity.innerHTML = '<span class="sc-teal-text">'+$response+'%</span>';
-                }
+				if( $response < 40 ) {
+					humidity.innerHTML = '<span class="sc-red-text">'+$response+'%</span>';
+				}
+
+				if( $response > 40 && $response < 43 ) {
+					humidity.innerHTML = '<span class="sc-orange-text">'+$response+'%</span>';
+				}
+
+				if( $response > 43 && $response < 57 ) {
+					humidity.innerHTML = '<span class="sc-teal-text">'+$response+'%</span>';
+				}
             }
         }
         http.send();
@@ -145,13 +267,17 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
         http.onreadystatechange = function() {//Call a function when the state changes.
             if( http.readyState == 4 && http.status == 200 ) {
                 var $response = Number(http.responseText);
-                if( $response > 1200 ) {
-                    co.innerHTML = '<span class="sc-red-text">'+$response+'ppm</span>';
-                }
+				if( $response > 1250 ) {
+					co.innerHTML = '<span class="sc-red-text">'+$response+'ppm</span>';
+				}
 
-                if( $response < 1200 ) {
-                    co.innerHTML = '<span class="sc-teal-text">'+$response+'ppm</span>';
-                }
+				if( $response > 1150 && $response < 1250 ) {
+					co.innerHTML = '<span class="sc-orange-text">'+$response+'ppm</span>';
+				}
+
+				if( $response < 1150 ) {
+					co.innerHTML = '<span class="sc-teal-text">'+$response+'ppm</span>';
+				}
             }
         }
         http.send();

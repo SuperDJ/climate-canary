@@ -1,5 +1,5 @@
 <?php
-$title = 'Home';
+$title = 'Settings';
 require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 ?>
 
@@ -65,12 +65,18 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
                     <h2>Eenheden</h2>
                     <p>Snelheid:</p>
                     <select name="snelheid" class="sc-select">
+                        <?php
+                        echo '<option value="'.( $session->exists('settings') ? $session->get('settings')['snelheid'] : 'KM/H').'">'.( $session->exists('settings') ? $session->get('settings')['snelheid'] : 'KM/H').'</option>';
+                        ?>
                         <option value="KM/H">KM/H</option>
                         <option value="MPH">MPH</option>
                     </select>
 
                     <p>Temperatuur:</p>
                     <select name="graden" class="sc-select">
+						<?php
+						echo '<option value="'.( $session->exists('settings') ? $session->get('settings')['graden'] : 'Celsius').'">'.( $session->exists('settings') ? $session->get('settings')['graden'] : 'Celsius').'</option>';
+						?>
                         <option value="Celsius">Celsius</option>
                         <option value="Fahrenheit">Fahrenheit</option>
                     </select>
@@ -108,6 +114,9 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
                     <br />
                     <p>Stuur een notificatie om de</p>
                     <select name="notification-pause" class="sc-select" <?php echo ( !empty( $settings ) && $settings['notification-receive'] == 'no' ? 'disabled' : ''); ?>>
+						<?php
+						echo '<option value="'.( $session->exists('settings') ? $session->get('notification-pause')['graden'] : '5 minuten').'">'.( $session->exists('notification-pause') ? $session->get('settings')['graden'] : '5 minuten').'</option>';
+						?>
                         <option value="5 minuten">5 minuten</option>
                         <option value="15 minuten">15 minuten</option>
                         <option value="30 minuten">30 minuten</option>

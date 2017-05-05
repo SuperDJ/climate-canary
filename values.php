@@ -170,7 +170,7 @@ $sensor = new Sensor($db);
                             $alert.innerText = 'Zet de kachel wat hoger';
                         }
 
-						if( $response > 17.5 && $response <18.5 ) {
+						if( $response > 17.5 && $response < 18.5 ) {
 							if( $degrees == 'Fahrenheit' ) {
 								$response = ($response * 1.8) + 32;
 							}
@@ -190,7 +190,7 @@ $sensor = new Sensor($db);
 							$alert.innerText = 'De temperatuur is precies goed';
 						}
 
-						if( $response > 20.5 && $response <21.5 ) {
+						if( $response > 20.5 && $response < 21.5 ) {
 							if( $degrees == 'Fahrenheit' ) {
 								$response = ($response * 1.8) + 32;
 							}

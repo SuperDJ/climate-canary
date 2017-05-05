@@ -29,6 +29,14 @@ button:hover {
     font-size: .9rem;
 }
 
+.sc-card.home.data {
+    padding: 17px;
+}
+
+.data {
+    color: lightgray;
+}
+
 .text {
     font-weight: bold;
     color: var(--main-color);

@@ -78,57 +78,59 @@ $(document).ready(function() {
 		return false;
 	}
 
-	getToken( credentials, function( token ) {
-		/*console.log('Token:');
-		console.log( token );*/
+	setInterval( function() {
+		getToken( credentials, function( token ) {
+			/*console.log('Token:');
+			console.log( token );*/
 
-		getSensors( token, function( sensors ) {
-			/*console.log('Sensors:');
-			console.log( sensors );*/
+			getSensors( token, function( sensors ) {
+				/*console.log('Sensors:');
+				console.log( sensors );*/
 
-			getSensorData(token, function( data ) {
-		   		console.log('Data:');
-		   		console.log(data);
-
-				var humidity = 0,
-					humidityDate = '',
-					co2 = 0,
-					co2Date = '',
-					temp = 0,
-					tempDate = '';
-
-				// Only store last value
-				for( var i = 0; i < data.length; i++ ) {
-					// Check if value isn't empty
-					if( data[i].d_humidity != null ) {
-						humidityDate = data[i].event_datetime;
-						humidity = data[i].d_humidity;
-					}
-
-					if( data[i].d_co2 != null ) {
-						co2Date = data[i].event_datetime;
-						co2 = data[i].d_co2;
-					}
-
-					if( data[i].d_temperature != null ) {
-						tempDate = data[i].event_datetime;
-						temp = data[i].d_temperature;
-					}
-
-				/*	console.log(data[i]);
-					console.log(data[i].d_humidity);*/
-				}
-				console.log(humidity);
-				console.log(co2);
-				console.log(temp);
-
-				// Send data to be inserted in db
-				var url = '/climate-canary/core/ajax.php?co2='+co2+'&co2Date='+co2Date+'&temp='+temp+'&tempDate='+tempDate+'&humidity='+humidity+'&humidityDate='+humidityDate;
-
-				$.get( url, function( data ) {
+				getSensorData(token, function( data ) {
+					console.log('Data:');
 					console.log(data);
+
+					var humidity = 0,
+						humidityDate = '',
+						co2 = 0,
+						co2Date = '',
+						temp = 0,
+						tempDate = '';
+
+					// Only store last value
+					for( var i = 0; i < data.length; i++ ) {
+						// Check if value isn't empty
+						if( data[i].d_humidity != null ) {
+							humidityDate = data[i].event_datetime;
+							humidity = data[i].d_humidity;
+						}
+
+						if( data[i].d_co2 != null ) {
+							co2Date = data[i].event_datetime;
+							co2 = data[i].d_co2;
+						}
+
+						if( data[i].d_temperature != null ) {
+							tempDate = data[i].event_datetime;
+							temp = data[i].d_temperature;
+						}
+
+					/*	console.log(data[i]);
+						console.log(data[i].d_humidity);*/
+					}
+					/*console.log(humidity);
+					console.log(co2);
+					console.log(temp);*/
+
+					// Send data to be inserted in db
+					var url = '/climate-canary/core/ajax.php?co2='+co2+'&co2Date='+co2Date+'&temp='+temp+'&tempDate='+tempDate+'&humidity='+humidity+'&humidityDate='+humidityDate;
+
+					$.get( url, function( data ) {
+						console.log(data);
+					});
 				});
 			});
 		});
-	});
+	}, 5000);
 });

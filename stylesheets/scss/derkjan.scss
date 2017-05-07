@@ -33,16 +33,13 @@ form {
 
 .sc-card {
 	background: $white;
-	@include flex-container(row, wrap, center, center, flex-start);
+	@include flex-container(row, wrap, center, center, center);
 
 	&.home {
 		color: var(--main-color, $main-color);
-		font-size: rem-calc(40px);
+		font-size: rem-calc(30px);
 		font-weight: bold;
-
-		@media #{$medium-down} {
-			min-height: rem-calc(150px);
-		}
+		min-height: rem-calc(150px);
 
 		.material-icons {
 			color: var(--main-color, $main-color);
@@ -52,6 +49,10 @@ form {
 
 		.material-icons, span {
 			width: 100%;
+		}
+
+		.text {
+			font-size: rem-calc(14px);
 		}
 	}
 }

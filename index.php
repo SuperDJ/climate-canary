@@ -10,7 +10,7 @@ $sensor = new Sensor( $db );
         <a href="/climate-canary/<?php echo $address->getHomeUrl(); ?>" class="sc-card sc-center home address">
             <div class="sc-card-supporting">
                 <i class="material-icons">home</i>
-                <span>Naar huis</span>
+                <span class="text">Naar huis</span>
             </div>
         </a>
     </div>
@@ -20,7 +20,7 @@ $sensor = new Sensor( $db );
         <a href="/climate-canary/navigate-to.php" class="sc-card sc-center home">
             <div class="sc-card-supporting">
                 <i class="material-icons">navigation</i>
-                <span>Navigeer naar</span>
+                <span class="text">Navigeer naar</span>
             </div>
         </a>
     </div>
@@ -144,7 +144,7 @@ $sensor = new Sensor( $db );
         <a href="/climate-canary/settings.php" class="sc-card sc-center home">
             <div class="sc-card-supporting">
                 <i class="material-icons">settings</i>
-                <span>Instellingen</span>
+                <span class="text">Instellingen</span>
             </div>
         </a>
     </div>

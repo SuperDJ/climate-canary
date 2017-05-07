@@ -20,7 +20,7 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
     </div>
 
     <section class="test">
-        <a href="/climate-canary/navigate-to.php" class="sc-raised-button">Back</a>
+        <a href="/climate-canary/navigate-to.php" class="sc-raised-button">Terug</a>
     </section>
 
 	<section class="row">
@@ -31,7 +31,7 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
         <div id="speed">0<?php echo ( $session->exists('settings') ? $session->get('settings')['snelheid'] : 'KM/H' ); ?></div>
 
 		<?php
-       /* $response = $sensor->get('degrees');
+        $response = $sensor->get('degrees');
         $degrees = ( $session->exists('settings') ? $session->get('settings')['graden'] : 'Celsius' );
         $html = '';
 
@@ -78,12 +78,12 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
             $response = number_format( $response, 1, '.', '');
 
             $html .= '<span class="sc-red-text">'.$response.($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ).'</span>';
-        }*/
+        }
         ?>
-        <a href="/climate-canary/values.php?type=temperature" id="degrees"><?php /*echo $html; */?></a>
+        <a href="/climate-canary/values.php?type=temperature" id="degrees"><?php echo $html; ?></a>
 
 		<?php
-        /*$response = $sensor->get('co');
+        $response = $sensor->get('co');
         $html = '';
 
         if( $response > 1250 ) {
@@ -96,12 +96,12 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
 
         if( $response < 1150 ) {
             $html .= '<span class="sc-teal-text">'.$response.'ppm</span>';
-        }*/
+        }
         ?>
-        <a href="/climate-canary/values.php?type=carbon-dioxide" id="co"><?php /*echo $html; */?></span></a>
+        <a href="/climate-canary/values.php?type=carbon-dioxide" id="co"><?php echo $html; ?></span></a>
 
 		<?php
-        /*$response = $sensor->get('humidity');
+        $response = $sensor->get('humidity');
         $html = '';
 
         if( $response > 60 ) {
@@ -122,9 +122,9 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
 
         if( $response > 43 && $response < 57 ) {
             $html .= '<span class="sc-teal-text">'.$response.'%</span>';
-        }*/
+        }
         ?>
-        <a href="/climate-canary/values.php?type=humidity" id="humidity"><?php /*echo $html; */?></a>
+        <a href="/climate-canary/values.php?type=humidity" id="humidity"><?php echo $html; ?></a>
 
         <div id="time"></div>
 
@@ -234,7 +234,7 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
 
 			http.onreadystatechange = function() {//Call a function when the state changes.
 				if( http.readyState == 4 && http.status == 200 ) {
-					var $response = Number(http.responseText).toFixed(1);;
+					var $response = Number(http.responseText);
 					if( $response < 17.5 ) {
 						if( $degrees == 'Fahrenheit' ) {
 							$response = ($response * 1.8) + 32;

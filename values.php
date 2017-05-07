@@ -32,7 +32,7 @@ $sensor = new Sensor($db);
         <h1><?php echo $title; ?></h1>
 
 		<?php
-/*		$degrees = ( $session->exists('settings') ? $session->get('settings')['graden'] : 'Celsius' );
+		$degrees = ( $session->exists('settings') ? $session->get('settings')['graden'] : 'Celsius' );
 		$response = $sensor->get($table);
 		$value = '';
 		$alert = '';
@@ -132,11 +132,11 @@ $sensor = new Sensor($db);
 				}
 				break;
 		}
-		*/?>
+		?>
 
-        <p id="value"><?php echo $sensor->get($table).' '/*.$value*/; ?></p>
+        <p id="value"><?php echo $value; ?></p>
         <p>in de auto</p>
-        <p id="alert"><?php /*echo $alert;*/ ?></p>
+        <p id="alert"><?php echo $alert; ?></p>
 
     </div>
 </section>

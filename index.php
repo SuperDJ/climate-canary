@@ -30,7 +30,7 @@ $sensor = new Sensor( $db );
     <div class="col col-xs-6 col-sm-6">
         <a href="/climate-canary/values.php?type=temperature" class="sc-card sc-center home data">
            <?php
-/*            $response = $sensor->get('degrees');
+            $response = $sensor->get('degrees');
 			$degrees = ( $session->exists('settings') ? $session->get('settings')['graden'] : 'Celsius' );
             $html = '';
 
@@ -78,8 +78,8 @@ $sensor = new Sensor( $db );
 
 				$html .= '<span class="sc-red-text">'.$response.($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ).'</span>';
 			}
-            */?>
-            <span class="data" id="degrees">Laden...<?php /*echo $html; */?></span><br>
+            ?>
+            <span class="data" id="degrees"><?php echo $html; ?></span><br>
             <span class="text">Temperatuur</span>
         </a>
     </div>
@@ -87,7 +87,7 @@ $sensor = new Sensor( $db );
     <div class="col col-xs-6 col-sm-6">
         <a href="/climate-canary/values.php?type=carbon-dioxide" class="sc-card sc-center home data">
             <?php
-/*			$response = $sensor->get('co');
+			$response = $sensor->get('co');
 			$html = '';
 
 			if( $response > 1250 ) {
@@ -101,8 +101,8 @@ $sensor = new Sensor( $db );
 			if( $response < 1150 ) {
 				$html .= '<span class="sc-teal-text">'.$response.'ppm</span>';
 			}
-            */?>
-            <span class="data" id="co">Laden...<?php /*echo $html; */?></span><br>
+            ?>
+            <span class="data" id="co"><?php echo $html; ?></span><br>
             <span class="text">CO<sub>2</sub> gehalte</span>
         </a>
     </div>
@@ -112,7 +112,7 @@ $sensor = new Sensor( $db );
     <div class="col col-xs-6 col-sm-6">
         <a href="/climate-canary/values.php?type=humidity" class="sc-card sc-center home data">
             <?php
-/*            $response = $sensor->get('humidity');
+            $response = $sensor->get('humidity');
             $html = '';
 
 			if( $response > 60 ) {
@@ -134,8 +134,8 @@ $sensor = new Sensor( $db );
 			if( $response > 43 && $response < 57 ) {
 				$html .= '<span class="sc-teal-text">'.$response.'%</span>';
 			}
-            */?>
-            <span class="data" id="humidity">Laden...<?php /*echo $html; */?></span><br>
+            ?>
+            <span class="data" id="humidity"><?php echo $html; ?></span><br>
             <span class="text">Luchtvochigheid</span>
         </a>
     </div>

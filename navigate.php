@@ -147,7 +147,11 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
             minutes = 0,
             endDate = new Date(date),
             pauseTime = document.getElementById('pauseTime'),
-            $pauseTime = new Date(date);
+            $pauseTime = new Date(date),
+            $notifications = '<?php echo ( $session->exists('settings') ? $session->get('settings')['notification-receive'] : 'yes' ); ?>',
+            $notification = document.getElementById('notification');
+            $notificationTitle = document.getElementById('notification-title'),
+            $notificationContent = document.getElementById('notification-content');
 
         // Set current time
         time.innerText =
@@ -242,6 +246,15 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
 						$response = $response.toFixed(1);
 
 						degrees.innerHTML = '<span class="sc-red-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
+						$notificationTitle.innerHTML = '<span class="sc-red-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
+						$notificationContent.innerText = 'Zet de kachel wat hoger';
+						if( $notifications == 'yes' ) {
+						    $notification.className += ' show';
+
+						    setTimeout(function() {
+						        $notification.className = $notification.className.replace(' show', '');
+                            }, 2500);
+                        }
 					}
 
 					if( $response > 17.5 && $response < 18.5 ) {
@@ -251,6 +264,15 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
 						$response = $response.toFixed(1);
 
 						degrees.innerHTML = '<span class="sc-orange-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
+						$notificationTitle.innerHTML = '<span class="sc-orange-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
+						$notificationContent.innerText = 'De temperatuur dreigt te laag te worden.';
+						if( $notifications == 'yes' ) {
+							$notification.className += ' show';
+
+							setTimeout(function() {
+							    $notification.className = $notification.className.replace(' show', '');
+                            }, 2500);
+						}
 					}
 
 					if( $response > 18.5 && $response < 20.5 ) {
@@ -260,6 +282,15 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
 						$response = $response.toFixed(1);
 
 						degrees.innerHTML = '<span class="sc-teal-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
+						$notificationTitle.innerHTML = '<span class="sc-teal-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
+						$notificationContent.innerText = 'De temperatuur is precies goed';
+						if( $notifications == 'yes' ) {
+							$notification.className += ' show';
+
+							setTimeout(function() {
+							    $notification.className = $notification.className.replace(' show', '');
+                            }, 2500);
+						}
 					}
 
 					if( $response > 20.5 && $response < 21.5 ) {
@@ -269,6 +300,15 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
 						$response = $response.toFixed(1);
 
 						degrees.innerHTML = '<span class="sc-orange-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
+						$notificationTitle.innerHTML = '<span class="sc-orange-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
+						$notificationContent.innerText = 'De temperatuur dreigt te hoog te worden.';
+						if( $notifications == 'yes' ) {
+							$notification.className += ' show';
+
+							setTimeout(function() {
+							    $notification.className = $notification.className.replace(' show', '');
+                            }, 2500);
+						}
 					}
 
 					if( $response > 21.5) {
@@ -278,6 +318,15 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
 						$response = $response.toFixed(1);
 
 						degrees.innerHTML = '<span class="sc-red-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
+						$notificationTitle.innerHTML = '<span class="sc-red-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
+						$notificationContent.innerText = 'Zet de kachel lager of doe een raam open';
+						if( $notifications == 'yes' ) {
+							$notification.className += ' show';
+
+							setTimeout(function() {
+							    $notification.className = $notification.className.replace(' show', '');
+                            }, 2500);
+						}
 					}
 				}
 			}
@@ -299,22 +348,67 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
 					var $response = Number(http.responseText);
 					if( $response > 60 ) {
 						humidity.innerHTML = '<span class="sc-red-text">'+$response+'%</span>';
+						$notificationTitle.innerHTML = '<span class="sc-red-text">'+$response+'%</span>';
+						$notificationContent.innerText = 'Zet de kachel hoger';
+						if( $notifications == 'yes' ) {
+							$notification.className += ' show';
+
+							setTimeout(function() {
+							    $notification.className = $notification.className.replace(' show', '');
+                            }, 2500);
+						}
 					}
 
 					if( $response > 57 && $response < 60 ) {
 						humidity.innerHTML = '<span class="sc-orange-text">'+$response+'%</span>';
+						$notificationTitle.innerHTML = '<span class="sc-orange-text">'+$response+'%</span>';
+						$notificationContent.innerText = 'De luchtvochtigheid dreigt te hoog te worden.';
+						if( $notifications == 'yes' ) {
+							$notification.className += ' show';
+
+							setTimeout(function() {
+							    $notification.className = $notification.className.replace(' show', '');
+                            }, 2500);
+						}
 					}
 
 					if( $response < 40 ) {
 						humidity.innerHTML = '<span class="sc-red-text">'+$response+'%</span>';
+						$notificationTitle.innerHTML = '<span class="sc-red-text">'+$response+'%</span>';
+						$notificationContent.innerText = 'Zet een raam open of gebruik een luchtbevochtiger';
+						if( $notifications == 'yes' ) {
+							$notification.className += ' show';
+
+							setTimeout(function() {
+							    $notification.className = $notification.className.replace(' show', '');
+                            }, 2500);
+						}
 					}
 
 					if( $response > 40 && $response < 43 ) {
 						humidity.innerHTML = '<span class="sc-orange-text">'+$response+'%</span>';
+						$notificationTitle.innerHTML = '<span class="sc-orange-text">'+$response+'%</span>';
+						$notificationContent.innerText = 'De luchtvochtigheid dreigt te laag te worden.';
+						if( $notifications == 'yes' ) {
+							$notification.className += ' show';
+
+							setTimeout(function() {
+							    $notification.className = $notification.className.replace(' show', '');
+                            }, 2500);
+						}
 					}
 
 					if( $response > 43 && $response < 57 ) {
 						humidity.innerHTML = '<span class="sc-teal-text">'+$response+'%</span>';
+						$notificationTitle.innerHTML = '<span class="sc-teal-text">'+$response+'%</span>';
+						$notificationContent.innerText = 'De luchtvochtigheid is precies goed';
+						if( $notifications == 'yes' ) {
+							$notification.className += ' show';
+
+							setTimeout(function() {
+							    $notification.className = $notification.className.replace(' show', '');
+                            }, 2500);
+						}
 					}
 				}
 			}
@@ -336,14 +430,41 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
 					var $response = Number(http.responseText);
 					if( $response > 1250 ) {
 						co.innerHTML = '<span class="sc-red-text">'+$response+'ppm</span>';
+						$notificationTitle.innerHTML = '<span class="sc-red-text">'+$response+'ppm</span>';
+						$notificationContent.innerText = 'Doe een raam open of zet de luchtoevoer op van buitenaf';
+						if( $notifications == 'yes' ) {
+							$notification.className += ' show';
+
+							setTimeout(function() {
+							    $notification.className = $notification.className.replace(' show', '');
+                            }, 2500);
+						}
 					}
 
 					if( $response > 1150 && $response < 1250 ) {
 						co.innerHTML = '<span class="sc-orange-text">'+$response+'ppm</span>';
+						$notificationTitle.innerHTML = '<span class="sc-orange-text">'+$response+'ppm</span>';
+						$notificationContent.innerText = 'De Co2 waarde dreigt te hoog te worden.';
+						if( $notifications == 'yes' ) {
+							$notification.className += ' show';
+
+							setTimeout(function() {
+							    $notification.className = $notification.className.replace(' show', '');
+                            }, 2500);
+						}
 					}
 
 					if( $response < 1150 ) {
 						co.innerHTML = '<span class="sc-teal-text">'+$response+'ppm</span>';
+						$notificationTitle.innerHTML = '<span class="sc-teal-text">'+$response+'ppm</span>';
+						$notificationContent.innerText = 'De Co2 waarde is goed';
+						if( $notifications == 'yes' ) {
+							$notification.className += ' show';
+
+                            setTimeout(function() {
+                                $notification.className = $notification.className.replace(' show', '');
+                            }, 2500);
+						}
 					}
 				}
 			}

@@ -4,9 +4,9 @@ if( !empty( $_GET['id'] ) && $db->exists('id', 'address', 'id', base64_decode( $
 	$id = $db->sanitize( base64_decode( $_GET['id'] ) );
 
 	if( $address->delete($id) ) {
-		$user->to('/climate-canary/navigate-to.php');
+		$user->to('/climate-canary/navigate-to.php?message=Adres verwijderd&type=deleted');
 	} else {
-		$user->to('/climate-canary/navigate-to.php');
+		$user->to('/climate-canary/navigate-to.php?message=Adres is niet verwijderd&type=deleted');
 	}
 } else {
 	$user->to('/climate-canary/navigate-to.php');

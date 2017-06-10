@@ -44,7 +44,7 @@ $navigation-drawer: ('full-height', 'clipped', 'floating', 'persistent', 'tempor
 //@import 'components/navigation-drawer'; // Used to style navigation drawer (can be turned off)
 
 //@import 'components/lists'; // Used to style lists (can be turned off)
-//@import 'components/notifications'; // Notifications style (can be turned off)
+@import 'components/notifications'; // Notifications style (can be turned off)
 //@import 'components/pickers'; // Used to style date and time picker (can be turned off)
 
 $progress: (/*'determinate',*/ 'indeterminate', /*'buffer',*/ 'circular'); // It's better to turn off "buffer" since it isn't working properly

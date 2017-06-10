@@ -50,7 +50,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
                     $session->set('settings', $validation);
 
                     if( $session->exists('settings') ) {
-                        echo '<div class="success sc-card sc-card-supporting" role="alert">Settings bijgewerkt. <a href="/climate-canary/settings.php">Herlaad</a> pagina om wijzigingen te bekijken</div>';
+                        $user->to('settings.php?message=Settings bijgewerkt');
                     }
                 } else {
                     echo $form->outputErrors();
@@ -60,6 +60,13 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 
             <form action="" method="post">
                 <h1>Instellingen</h1>
+
+                <?php
+                if( !empty( $_GET['message'] ) ) {
+                    $message = $db->sanitize($_GET['message']);
+					echo '<div class="success sc-card sc-card-supporting" role="alert">'.$message.'</div>';
+                }
+                ?>
 
                 <div class="settings-eenheden">
                     <h2>Eenheden</h2>
@@ -106,23 +113,36 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
                 <div class="settings-notificaties">
                     <h2>Notificaties</h2>
 
-                    <input type="radio" id="yes" name="notification-receive" value="yes" class="sc-radio" <?php echo ( !empty( $settings ) && $settings['notification-receive'] == 'yes' ? 'checked' : ''); ?>>
+                    <input type="radio" id="yes" name="notification-receive" value="yes" class="sc-radio" <?php echo ( !empty( $settings ) && $settings['notification-receive'] == 'yes' ? 'checked' : ( isset($settings) && $settings['notification-receive'] == 'no' ? '' : 'checked')); ?>>
                     <label for="yes">Ik wil notificaties ontvangen</label>
                     <br>
                     <input type="radio" id="no" name="notification-receive" value="no" class="sc-radio" <?php echo ( !empty( $settings ) && $settings['notification-receive'] == 'no' ? 'checked' : ''); ?>>
                     <label for="no">Ik wil geen notificaties ontvangen</label>
                     <br />
-                    <p>Stuur een notificatie om de</p>
-                    <select name="notification-pause" class="sc-select" <?php echo ( !empty( $settings ) && $settings['notification-receive'] == 'no' ? 'disabled' : ''); ?>>
+                    <p>Geluid bij meldingen:</p>
+                    <input type="radio" id="standaard" name="notification-type" value="standaard" class="sc-radio" <?php echo ( !empty( $settings ) && $settings['notification-type'] == 'standaard' ? 'checked' : ''); ?> <?php echo ( !empty( $settings ) && $settings['notification-receive'] == 'no' ? 'disabled' : ''); ?>>
+                    <label for="standaard">Standaard</label>
+                    <br />
+                    <input type="radio" id="trillen" name="notification-type" value="trillen" class="sc-radio" <?php echo ( !empty( $settings ) && $settings['notification-type'] == 'trillen' ? 'checked' : ''); ?> <?php echo ( !empty( $settings ) && $settings['notification-receive'] == 'no' ? 'disabled' : ''); ?>>
+                    <label for="trillen">Trillen</label>
+                    <br />
+                    <input type="radio" id="stil" name="notification-type" value="stil" class="sc-radio" <?php echo ( !empty( $settings ) && $settings['notification-type'] == 'stil' ? 'checked' : ''); ?> <?php echo ( !empty( $settings ) && $settings['notification-receive'] == 'no' ? 'disabled' : ''); ?>>
+                    <label for="stil">Stil</label>
+                    <br>
+                    <div class="sc-floating-input">
+                        <input type="number" name="notification-pause" <?php echo ( !empty( $settings ) && $settings['notification-receive'] == 'no' ? 'disabled' : ''); ?>>
+                        <label for="pause">Stuur een notificatie om de .. minuten</label>
+                    </div>
+                    <!--<select name="notification-pause" class="sc-select" <?php /*echo ( !empty( $settings ) && $settings['notification-receive'] == 'no' ? 'disabled' : ''); */?>>
 						<?php
-						echo '<option value="'.( $session->exists('settings') ? $session->get('notification-pause')['graden'] : '5 minuten').'">'.( $session->exists('notification-pause') ? $session->get('settings')['graden'] : '5 minuten').'</option>';
-						?>
+/*						echo '<option value="'.( $session->exists('settings') ? $session->get('notification-pause')['graden'] : '5 minuten').'">'.( $session->exists('notification-pause') ? $session->get('settings')['graden'] : '5 minuten').'</option>';
+						*/?>
                         <option value="5 minuten">5 minuten</option>
                         <option value="15 minuten">15 minuten</option>
                         <option value="30 minuten">30 minuten</option>
                         <option value="1 uur">1 uur</option>
                         <option value="Stuur geen notificaties">Stuur geen notificaties</option>
-                    </select>
+                    </select>-->
                     <br />
                     <p>Geen meldingen ontvangen tot</p>
 
@@ -131,15 +151,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
                         <label for="time">Tijd <em><?php echo '(uu:mm:ss)'; ?></em></label>
                     </div>
                     <br />
-                    <p>Geluid bij meldingen:</p>
-                        <input type="radio" id="standaard" name="notification-type" value="standaard" class="sc-radio" <?php echo ( !empty( $settings ) && $settings['notification-type'] == 'standaard' ? 'checked' : ''); ?> <?php echo ( !empty( $settings ) && $settings['notification-receive'] == 'no' ? 'disabled' : ''); ?>>
-                        <label for="standaard">Standaard</label>
-                    <br />
-                        <input type="radio" id="trillen" name="notification-type" value="trillen" class="sc-radio" <?php echo ( !empty( $settings ) && $settings['notification-type'] == 'trillen' ? 'checked' : ''); ?> <?php echo ( !empty( $settings ) && $settings['notification-receive'] == 'no' ? 'disabled' : ''); ?>>
-                        <label for="trillen">Trillen</label>
-                    <br />
-                        <input type="radio" id="stil" name="notification-type" value="stil" class="sc-radio" <?php echo ( !empty( $settings ) && $settings['notification-type'] == 'stil' ? 'checked' : ''); ?> <?php echo ( !empty( $settings ) && $settings['notification-receive'] == 'no' ? 'disabled' : ''); ?>>
-                        <label for="stil">Stil</label>
+
                 </div>
                 <hr>
 

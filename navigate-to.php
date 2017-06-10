@@ -64,7 +64,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 				</div>
 
 				<div class="col col-xs-10 col-sm-10">
-					<input type="text" name="from" id="from" required placeholder="Huidige locatie">
+					<input type="text" name="from" id="from" class="fixed" required readonly placeholder="Huidige locatie">
                     <input type="text" name="fromLat" id="fromLat" class="captcha">
                     <input type="text" name="fromLng" id="fromLng" class="captcha">
 				</div>
@@ -96,6 +96,13 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
         <div class="sc-card sc-card-supporting">
             <h2>Geschiedenis</h2>
             <?php
+            if( !empty( $_GET['message'] ) && !empty( $_GET['type'] ) ) {
+                if( $_GET['type'] == 'add' || $_GET['type'] == 'deleted' ) {
+                    $message = $db->sanitize($_GET['message']);
+                    echo '<div class="sc-card sc-card-supporting success">'.$message.'</div>';
+                }
+            }
+
             $data = $address->data();
 
             if( empty( $data ) ) {
@@ -112,7 +119,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
                 foreach( $data as $row => $field ) {
 					echo '  <div class="row divided">
                                 <div class="col col-xs-2">
-                                    <i class="material-icons">'.$field['icon'].'</i>
+                                    <a href="favorite.php?type=add&id='.base64_encode($field['id']).'"><i class="material-icons">star_border</i></a>
                                 </div>
                 
                                 <a href="navigation-confirm.php?from=fAddress&fromLat=fLat&fromLng=fLng&to='.$field['address'].'&toLat='.$field['latitude'].'&toLng='.$field['longitude'].'" class="col col-xs-7 address">
@@ -120,9 +127,9 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
                                 </a>
                                 
                                 <div class="col col-xs-3">
-                                    <div class="col col-xs-6">
+                                    <!--<div class="col col-xs-6">
                                         <a href="address-edit.php?id='.base64_encode($field['id']).'"><i class="material-icons">edit</i></a>
-                                    </div>
+                                    </div>-->
                                     
                                     <div class="col col-xs-6">
                                         <a href="address-delete.php?id='.base64_encode($field['id']).'" onClick="return confirm(\'Weet je zeker dat je dit adres wilt verwijderen?\')"><i class="material-icons">delete</i></a>
@@ -142,6 +149,13 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
         <div class="sc-card sc-card-supporting">
             <h2>Favorieten</h2>
 			<?php
+			if( !empty( $_GET['message'] ) && !empty( $_GET['type'] ) ) {
+				if( $_GET['type'] == 'delete' || $_GET['type'] == 'deleted' ) {
+					$message = $db->sanitize($_GET['message']);
+					echo '<div class="sc-card sc-card-supporting success">'.$message.'</div>';
+				}
+			}
+
 			$data = $address->favorites();
 
 			if( empty( $data ) ) {
@@ -158,7 +172,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 				foreach( $data as $row => $field ) {
 					echo '  <div class="row divided">
                                 <div class="col col-xs-2">
-                                    <i class="material-icons">'.$field['icon'].'</i>
+                                    <a href="favorite.php?type=delete&id='.base64_encode($field['id']).'"><i class="material-icons">star</i></a>
                                 </div>
                 
                                 <a href="navigation-confirm.php?from=fAddress&fromLat=fLat&fromLng=fLng&to='.$field['address'].'&toLat='.$field['latitude'].'&toLng='.$field['longitude'].'" class="col col-xs-7 address">
@@ -166,9 +180,9 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
                                 </a>
                                 
                                 <div class="col col-xs-3">
-                                    <div class="col col-xs-6">
+                                    <!--<div class="col col-xs-6">
                                         <a href="address-edit.php?id='.base64_encode($field['id']).'"><i class="material-icons">edit</i></a>
-                                    </div>
+                                    </div>-->
                                     
                                     <div class="col col-xs-6">
                                         <a href="address-delete.php?id='.base64_encode($field['id']).'"><i class="material-icons">delete</i></a>
@@ -182,7 +196,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
     </div>
 </section>
 
-<!-- Navigation button -->
+<!-- Navigation button --
 <div class="sc-floating-button sc-trigger quick-nav" data-sc-trigger="options">
     <i class="material-icons">menu</i>
 
@@ -191,6 +205,6 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
         <li><a href="#history"><i class="material-icons">access_time</i></a></li>
         <li><a href="#favorites"><i class="material-icons">star</i></a></li>
     </ul>
-</div>
+</div>-->
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/footer.php';

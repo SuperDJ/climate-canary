@@ -88,11 +88,11 @@ class Address {
 		";
 
 		if( !is_null( $id ) ) {
-			$query .= "WHERE `a`.`id` = :id LIMIT 1";
+			$query .= "WHERE `a`.`id` = :id AND `favorite` = 0 LIMIT 1";
 			$stmt = $this->_db->mysqli->prepare($query);
 			$stmt->bindParam(':id', $id, PDO::PARAM_INT);
 		} else {
-			$query .= "ORDER BY `id` DESC LIMIT 3";
+			$query .= "WHERE `favorite` = 0 ORDER BY `id` DESC LIMIT 3";
 			$stmt = $this->_db->mysqli->prepare($query);
 		}
 		$stmt->execute();
@@ -160,7 +160,7 @@ class Address {
 			FROM `address` `a`
 			JOIN `icons` `i`
 				ON `i`.`id` = `a`.`icons_id`
-			WHERE `icons_id` != 4	
+			WHERE `favorite` = 1
 		";
 		$stmt = $this->_db->mysqli->prepare($query);
 		$stmt->execute();

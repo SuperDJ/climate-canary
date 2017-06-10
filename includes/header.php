@@ -63,3 +63,14 @@ $file = str_replace('/climate-canary/', '', $file);
 </header>
 
 <main class="container">
+    <div class="sc-notification" id="notification">
+        <div class="sc-notification-header">
+            <div class="sc-notification-header-app-icon"><i class="material-icons">wb_cloudy</i></div>
+            <div class="sc-notification-header-app-name sc-separator">Climate</div>
+        </div>
+
+        <div class="sc-notification-content">
+            <div class="sc-notification-content-title" id="notification-title">John Doe</div>
+            <div class="sc-notification-content-text" id="notification-content">This is an example message</div>
+        </div>
+    </div>

@@ -14,6 +14,12 @@ $font-color-headline: $font-color-display-4;
 main {
 	background: var(--background, $background);
 	left: 0;
+	font-weight: 500;
+}
+
+label {
+	font-weight: 500;
+	font-size: 1rem;
 }
 
 form {
@@ -67,10 +73,6 @@ img {
 .colored-background {
 	background: var(--main-color, $main-color);
 
-	label {
-		color: $white;
-	}
-
 	.sc-raised-button {
 		color: var(--main-color, $main-color);
 		background: var(--secondary-color, $secondary-color);
@@ -91,7 +93,6 @@ img {
 
 	input {
 		background: rgba($white, .3);
-		color: $white !important;
 
 		@include placeholder() {
 			color: rgba($white, .6);
@@ -101,6 +102,10 @@ img {
 			@include placeholder() {
 				color: $white;
 			}
+		}
+
+		&.fixed {
+			background: var(--main-color, $main-color);
 		}
 	}
 }
@@ -350,6 +355,7 @@ div.sc-select {
 
 		> div, > a {
 			display: block;
+			font-size: rem-calc(23px);
 			background: $white;
 			min-width: rem-calc(100px);
 			padding: rem-calc(10px);
@@ -373,6 +379,10 @@ div.sc-select {
 				height: rem-calc(40px);
 				flex-basis: 33.33%;
 			}
+
+			#arrival {
+				font-size: rem-calc(15px);
+			}
 		}
 	}
 
@@ -391,4 +401,27 @@ div.sc-select {
 			}
 		}
 	}
+}
+
+.sc-notification {
+	background: $white;
+	position: fixed;
+	z-index: 10;
+	margin-top: -102%;
+	@include transition(margin-top $transition-small-duration $basic-transition);
+
+	&.show {
+		margin-top: 0;
+	}
+
+	@media #{$landscape} {
+		left: rem-calc(15px);
+		right: calc( 33.33% + 15px);
+	}
+
+	@media #{$portrait} {
+		left: rem-calc(15px);
+		right: rem-calc(15px);
+	}
+
 }

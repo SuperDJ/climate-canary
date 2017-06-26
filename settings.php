@@ -28,6 +28,9 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 						'maxLength' => 10,
 						'name' => 'Temperatuur'
 					),
+                    'home' => array(
+                        'name' => 'Thuis'
+                    ),
                     'notification-receive' => array(
                         'required' => true,
                         'maxLenght' => 3,
@@ -47,7 +50,26 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
                 ));
 
                 if( empty( $form->errors ) ) {
-                    $session->set('settings', $validation);
+                    if( !empty( $validation['home'] ) ) {
+                        $stmt = $db->mysqli->prepare("UPDATE `address` SET `icons_id` = DEFAULT WHERE `icons_id` = 1");
+                        $stmt->execute();
+                        $stmt = null;
+
+                        $stmt = $db->mysqli->prepare("UPDATE `address` SET `icons_id` = 1, `favorite` = 1 WHERE `id` = :id");
+                        $stmt->bindParam(':id', $validation['home'], PDO::PARAM_INT);
+                        $stmt->execute();
+
+                        if( $stmt->rowCount() >= 1 ) {
+                            $stmt = null;
+							$session->set( 'settings', $validation );
+							$user->to('settings.php?message=Settings bijgewerkt');
+                        } else {
+                            $stmt = null;
+							$user->to('settings.php?message=Huis adres niet bijgewerkt');
+                        }
+                    } else {
+						$session->set( 'settings', $validation );
+					}
 
                     if( $session->exists('settings') ) {
                         $user->to('settings.php?message=Settings bijgewerkt');
@@ -93,19 +115,24 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
 
                 <div class="settings-thuis">
                     <h2>Thuisadres</h2>
+                    <select name="home" class="sc-select">
                     <?php
                     $data = $address->data();
 
+                    $home = $db->detail('id', 'address', 'icons_id', 1);
+
+                    if( !empty($home) ) {
+                        echo '<option value="'.$home.'">'.$db->detail('address', 'address', 'id', $home).'</div>';
+                    }
+
+
                     foreach( $data as $row => $field ) {
-                        if( $field['icons_id'] == 1 ) {
-                            echo '  <p>'.$field['address'].'</p>
-                                    <a href="/climate-canary/address-edit.php?id='.base64_encode( $field['id'] ).'">Wijzig</a>';
-                        }
-                        if(in_array(1,$data)) {
-                            echo 'Voeg een thuisadres toe';
-                        }
+                        if( $field['id'] != $home ) {
+							echo '<option value="'.$field['id'].'">'.$field['address'].'</option>';
+						}
                     }
                     ?>
+                    </select>
                 </div>
 
                 <hr>

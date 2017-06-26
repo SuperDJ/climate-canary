@@ -76,23 +76,22 @@ class Address {
 	 *
 	 * @param null $id
 	 *
-	 * @return bool
+	 * @return bool|array
 	 */
 	public function data( $id = null ) {
 		$query = "
-			SELECT `a`.`id`, `address`, `name`, `latitude`, `longitude`, `icons_id`, `icon` 
+			SELECT `a`.`id`, `address`, `name`, `latitude`, `longitude`, `icons_id`, `icon`, `favorite` 
 			FROM `address` `a`
 			JOIN `icons` `i`
 				ON `i`.`id` = `a`.`icons_id`
-			
 		";
 
 		if( !is_null( $id ) ) {
-			$query .= "WHERE `a`.`id` = :id AND `favorite` = 0 LIMIT 1";
+			$query .= "WHERE `a`.`id` = :id LIMIT 1";
 			$stmt = $this->_db->mysqli->prepare($query);
 			$stmt->bindParam(':id', $id, PDO::PARAM_INT);
 		} else {
-			$query .= "WHERE `favorite` = 0 ORDER BY `id` DESC LIMIT 3";
+			$query .= "ORDER BY `id` DESC";
 			$stmt = $this->_db->mysqli->prepare($query);
 		}
 		$stmt->execute();

@@ -284,13 +284,13 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
 						degrees.innerHTML = '<span class="sc-teal-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
 						$notificationTitle.innerHTML = '<span class="sc-teal-text">' + $response + ($degrees == 'Celsius' ? '&deg;C' : '&deg;F' ) +'</span>';
 						$notificationContent.innerText = 'De temperatuur is precies goed';
-						if( $notifications == 'yes' ) {
+						/*if( $notifications == 'yes' ) {
 							$notification.className += ' show';
 
 							setTimeout(function() {
 							    $notification.className = $notification.className.replace(' show', '');
                             }, 2500);
-						}
+						}*/
 					}
 
 					if( $response > 20.5 && $response < 21.5 ) {
@@ -331,7 +331,7 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
 				}
 			}
 			http.send();
-		}, 15000);
+		}, 10000);
 		/** End Degrees **/
 
 		/** Humidity **/
@@ -402,18 +402,18 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
 						humidity.innerHTML = '<span class="sc-teal-text">'+$response+'%</span>';
 						$notificationTitle.innerHTML = '<span class="sc-teal-text">'+$response+'%</span>';
 						$notificationContent.innerText = 'De luchtvochtigheid is precies goed';
-						if( $notifications == 'yes' ) {
+						/*if( $notifications == 'yes' ) {
 							$notification.className += ' show';
 
 							setTimeout(function() {
 							    $notification.className = $notification.className.replace(' show', '');
                             }, 2500);
-						}
+						}*/
 					}
 				}
 			}
 			http.send();
-		}, 14000);
+		}, 15000);
 		/** End Humidity **/
 
 		/** Co **/
@@ -458,18 +458,18 @@ if( !empty( $from ) && !empty( $fLat ) && !empty( $fLng ) && !empty( $to ) && !e
 						co.innerHTML = '<span class="sc-teal-text">'+$response+'ppm</span>';
 						$notificationTitle.innerHTML = '<span class="sc-teal-text">'+$response+'ppm</span>';
 						$notificationContent.innerText = 'De Co2 waarde is goed';
-						if( $notifications == 'yes' ) {
+						/*if( $notifications == 'yes' ) {
 							$notification.className += ' show';
 
                             setTimeout(function() {
                                 $notification.className = $notification.className.replace(' show', '');
                             }, 2500);
-						}
+						}*/
 					}
 				}
 			}
 			http.send();
-		}, 16000);
+		}, 17500);
 		/** End Co **/
 	</script>
 	<script async defer

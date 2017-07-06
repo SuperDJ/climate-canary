@@ -157,7 +157,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/climate-canary/includes/header.php';
                     <label for="stil">Stil</label>
                     <br>
                     <div class="sc-floating-input">
-                        <input type="number" name="notification-pause" <?php echo ( !empty( $settings ) && $settings['notification-receive'] == 'no' ? 'disabled' : ''); ?>>
+                        <input type="number" name="notification-pause" id="pause" min="0" <?php echo ( !empty( $settings ) && $settings['notification-receive'] == 'no' ? 'disabled' : ''); ?>>
                         <label for="pause">Stuur een notificatie om de .. minuten</label>
                     </div>
                     <!--<select name="notification-pause" class="sc-select" <?php /*echo ( !empty( $settings ) && $settings['notification-receive'] == 'no' ? 'disabled' : ''); */?>>
